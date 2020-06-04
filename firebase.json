@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "RPG",
+      "public": "dist/RPG",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

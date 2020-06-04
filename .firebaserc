@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "firstrpg-3e46e": {
+      "hosting": {
+        "RPG": [
+          "firstrpg-3e46e"
+        ]
+      }
+    }
+  }
+}

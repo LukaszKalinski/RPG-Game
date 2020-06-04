@@ -1,0 +1,55 @@
+<ng-container *ngIf="!isMobile">
+  <div class="row m-0 p-0">
+    <div class="col m-0 p-0" cdkDropListGroup *ngIf="!characterInfo.currentDungeon.location && !characterInfo.currentCreation.element">
+
+      <ng-container>
+        <div class="row m-0 p-0">
+          <div class="col-md-4 m-0 p-0" [@stats]>
+            <app-char-stats></app-char-stats>
+          </div>
+          <div class="col-md-8 m-0 p-0" [@eq]>
+            <app-equipped></app-equipped>
+          </div>
+        </div>
+        <div class="row m-0 p-0">
+          <div class="col m-0 p-0" [@box]>
+            <app-safe-box></app-safe-box>
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+    <div class="col m-0 p-0" cdkDropListGroup *ngIf="characterInfo.currentDungeon.location">
+      <app-travelling></app-travelling>
+    </div>
+    <div class="col m-0 p-0" cdkDropListGroup *ngIf="characterInfo.currentCreation.element">
+      <app-travelling-collecting></app-travelling-collecting>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isMobile">
+  <div class="row m-0 p-0">
+    <div class="col m-0 p-0" cdkDropListGroup *ngIf="!characterInfo.currentDungeon.location && !characterInfo.currentCreation.element">
+
+      <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Statistics">
+          <app-char-stats></app-char-stats>
+        </mat-tab>
+        <mat-tab label="Equipment">
+          <app-equipped></app-equipped>
+        </mat-tab>
+        <mat-tab label="Inventories">
+          <app-safe-box></app-safe-box>
+        </mat-tab>
+      </mat-tab-group>
+
+    </div>
+    <div class="col m-0 p-0" cdkDropListGroup *ngIf="characterInfo.currentDungeon.location">
+      <app-travelling></app-travelling>
+    </div>
+    <div class="col m-0 p-0" cdkDropListGroup *ngIf="characterInfo.currentCreation.element">
+      <app-travelling-collecting></app-travelling-collecting>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,45 @@
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col m-0 p-0 text-center btn-group">
+    <button class="btn btn-success" (click)="loadAllItemsFromServer()">Load all from Server</button>
+    <button class="btn btn-warning" (click)="sendAllItemsToServer(allDungeons)">Send all to Server</button>
+    <button class="btn btn-danger" (click)="saveParticularItemInfo()">Save changes to Record</button>
+    <button class="btn btn-info" (click)="createNewItem()">Create New Record</button>
+  </div>
+</div>
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col-md-1 m-0 p-0 mx-auto my-auto">
+    <fa-icon [icon]="leftIcon" size="3x" (click)="goBack()" style="color: white"></fa-icon>
+  </div>
+  <div class="col md-10 m-0 p-0">
+    <div style="color: white" class="w-100">
+      {{ allDungeons[itemIndex].name }}
+    </div>
+    <div style="color: white" class="w-100">
+      {{ allDungeons[itemIndex].desc }}
+    </div>
+    <div style="color: white" class="w-100">
+      {{ allDungeons[itemIndex].image }}
+    </div>
+    <ng-container *ngFor="let item of selectedItem; let i = index">
+      <div class="skillcont" *ngIf="item[0] !== 'name' && item[0] !== 'desc' && item[0] !== 'image'">
+        {{ item[0] }} / <span style="color: gold">{{ item[1] }}</span>
+      </div>
+    </ng-container>
+  </div>
+  <div class="col-md-1 m-0 p-0 mx-auto my-auto">
+    <fa-icon [icon]="rightIcon" size="3x" (click)="goForward()" style="color: white"></fa-icon>
+  </div>
+</div>
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">Name:</div><input [(ngModel)]="itemName"></div>
+    <div class="itemcont"><div class="item">Req Lvl:</div><input [(ngModel)]="itemReqLvl"></div>
+    <div class="itemcont"><div class="item">Travel Time:</div><input [(ngModel)]="itemTravellingTime"></div>
+    <div class="itemcont"><div class="item">Is Opened:</div><input [(ngModel)]="itemIsOpened"></div>
+    <div class="itemcont"><div class="item">Is Unlocked:</div><input [(ngModel)]="itemIsUnlocked"></div>
+  </div>
+  <div class="col m-0 p-0 mx-auto">
+    <div class="itemcontw text-center"><div class="item text-center">Desc:</div><input class="itemcontw text-center" [(ngModel)]="itemDesc"></div>
+    <div class="itemcontw text-center"><div class="item text-center">Image:</div><input class="itemcontw text-center"  [(ngModel)]="itemImage"></div>
+  </div>
+</div>

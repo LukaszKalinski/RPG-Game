@@ -1,0 +1,15 @@
+<div class="row text-center mx-auto m-0 p-0">
+  <div class="col m-0 p-0 text-center mx-auto container">
+    <div>
+      <cdk-virtual-scroll-viewport itemSize="100" class="example-viewport">
+        <ng-container *ngIf="chatboxMessages.length > 0">
+          <div [@actions]="chatboxMessages.length">
+            <div *ngFor="let message of chatboxMessages; let i = index" class="list">
+              {{message}}
+            </div>
+          </div>
+        </ng-container>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  </div>
+</div>

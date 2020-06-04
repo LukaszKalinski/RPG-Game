@@ -1,0 +1,86 @@
+<app-single-creature [creature]="selectedCreature" *ngIf="selectedCreature" (creatureClosed)="onCloseCreature()"></app-single-creature>
+<app-travelling-collecting *ngIf="characterInfo.currentCreation.element"></app-travelling-collecting>
+
+<ng-container *ngIf="!isMobile && !characterInfo.currentCreation.element">
+  <div class="row m-0 p-0">
+    <div class="col m-0 p-0">
+      <div class="row m-0 p-0">
+        <div class="col m-0 p-0  text-center">
+          <div class="header m-1">
+            {{ loadedDungeon.name }}
+          </div>
+          <div class="header-locked m-1">
+            (Closing at: {{ returningDate.toLocaleString() }})
+          </div>
+          <div class="header-desc m-1 mx-auto">
+            {{ loadedDungeon.desc }}
+          </div>
+        </div>
+      </div>
+      <div class="row m-0 p-0">
+        <div class="col m-0 p-0 text-center">
+          <div class="header-desc m-1 mx-auto">
+            Monsters:
+          </div>
+          <div class="monsters mx-auto">
+            <ng-container *ngFor="let creature of getAllCreatures(loadedDungeon.name)">
+              <div
+              class="monster-container m-1"
+              [ngClass]="{'creaturelevelone' : getCreature(creature).rarity === 1, 'creatureleveltwo' : getCreature(creature).rarity === 2, 'creaturelevelthree' : getCreature(creature).rarity === 3, 'creaturelevelfour' : getCreature(creature).rarity === 4, 'creaturelevelfive' : getCreature(creature).rarity === 5}"
+              >
+                <div class="creature-desc">
+                  {{ creature }}
+                </div>
+                <div (click)='onOpenDetails(getCreature(creature))'>
+                  <img class="creature-image" [src]="getCreature(creature).image">
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isMobile && !characterInfo.currentCreation.element">
+  <div class="row m-0 p-0">
+    <div class="col m-0 p-0">
+      <div class="row m-0 p-0">
+        <div class="col m-0 p-0  text-center">
+          <div class="header m-1">
+            {{ loadedDungeon.name }}
+          </div>
+          <div class="header-locked m-1">
+            (Closing at: {{ returningDate.toLocaleString() }})
+          </div>
+          <div class="header-desc m-1 mx-auto" style="font-size: 14px">
+            {{ loadedDungeon.desc | slice:0:200}}...
+          </div>
+        </div>
+      </div>
+      <div class="row m-0 p-0">
+        <div class="col m-0 p-0 text-center">
+          <div class="header-desc m-1 mx-auto">
+            Monsters:
+          </div>
+          <div class="monsters mx-auto">
+            <ng-container *ngFor="let creature of getAllCreatures(loadedDungeon.name)">
+              <div
+              class="monster-container m-1"
+              [ngClass]="{'creaturelevelone' : getCreature(creature).rarity === 1, 'creatureleveltwo' : getCreature(creature).rarity === 2, 'creaturelevelthree' : getCreature(creature).rarity === 3, 'creaturelevelfour' : getCreature(creature).rarity === 4, 'creaturelevelfive' : getCreature(creature).rarity === 5}"
+              >
+                <div class="creature-desc">
+                  {{ creature }}
+                </div>
+                <div (click)='onOpenDetails(getCreature(creature))'>
+                  <img class="creature-image" [src]="getCreature(creature).image">
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

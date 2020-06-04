@@ -1,0 +1,25 @@
+<ng-container>
+  <div class="row m-0 p-0">
+    <div class="col w-100 m-0 p-0">
+      <div *ngIf="!isMobile" class="image-container" id="map-container"  (mousedown)="onStart()" (mouseup)="onStop()" (mouseleave)="onStop()" (mousemove)="onMove($event)">
+        <img
+        id="map-image"
+        class="drag-image"
+        [ngStyle]="{'top': lastY + 'px', 'left': lastX + 'px'}"
+        src="https://i.ibb.co/R3Y369y/png.png" />
+      </div>
+      <ng-container *ngIf="isMobile">
+        <div class="mobileheader">
+          World Map
+        </div>
+        <div class="image-container-mobile">
+          <img
+          class="drag-image-mobile"
+          src="https://i.ibb.co/R3Y369y/png.png" />
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+
+

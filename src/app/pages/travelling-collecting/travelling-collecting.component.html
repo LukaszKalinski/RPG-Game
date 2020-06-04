@@ -1,0 +1,30 @@
+<div class="container text-center" *ngIf="!finishedOffline">
+  <div class="header-title">
+    Currently You are busy!
+  </div>
+  <div class="header-title">
+    {{ isCollecting ? 'Collecting' : 'Crafting'}}: <span class="gold">{{ characterInfo.currentCreation.element }}</span>
+  </div>
+  <div class="header-title">
+    Returning: <span class="gold">{{ getTime(characterInfo.currentCreation.returnsTime) }}</span>
+  </div>
+  <div class="header-title">
+    Time left: <span class="gold">{{ timeLeft > 60 * 60 * 1000 ? getDate(timeLeft).getHours()-1 + ' : ' : '' }}{{ timeLeft > 60 * 1000   ? (getDate(timeLeft).getMinutes() !== 0 ? getDate(timeLeft).getMinutes() + ' : ' : '0 : ') : '' }}{{ getDate(timeLeft).getSeconds() }}</span>
+  </div>
+</div>
+
+<div class="container text-center" *ngIf="finishedOffline">
+  <div class="header-title">
+    You have {{ isCollecting ? 'collected' : 'crafted'}} it!
+  </div>
+  <div class="header-title">
+    {{ isCollecting ? 'Collected' : 'Crafted'}}: <span class="gold">{{ characterInfo.currentCreation.item }}</span>
+  </div>
+  <div class="header-title">
+    Amount: <span class="gold">{{ characterInfo.currentCreation.amount }}</span>
+  </div>
+  <div class="header-title">
+    You will be redirected automatically.
+  </div>
+</div>
+

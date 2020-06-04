@@ -1,0 +1,26 @@
+
+.container {
+  border-radius: 10px;
+  position: fixed;
+  top: 20vh;
+  left: 50vw;
+  width: 30vw;
+  min-width: 90%;
+  padding: 16px;
+  z-index: 100;
+  text-shadow: 0px 0px 5px black;
+  transform: translate(-50%,0);
+}
+
+.header-title {
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+  font-size: 24px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: white;
+}
+
+.gold {
+  color: gold;
+}

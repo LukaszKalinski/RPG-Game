@@ -1,0 +1,613 @@
+<app-singleitem [item]="selectedItem" [ringSlotNum]="ringSlotNum" [isEquipped]="true" [isShop]="false" *ngIf="selectedItem" (itemClosed)="onCloseItem()"></app-singleitem>
+
+<div class="row m-0 p-0 h-100" *ngIf="!isMobile">
+  <div class="col-md-8 m-0 p-0 mx-auto my-auto">
+    <table class="mx-auto my-auto mt-2 mb-2">
+      <tr>
+        <td>
+          <!-- PADS -->
+          <div>
+            <div class="eq-container">
+              <div *ngFor="let item of padsSlot">
+                <div
+                class="eq-slot-hor m-0 p-0"
+                [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                [class.activeeq]="!item.name.includes('Starting')">
+                  <img
+                  class="eq-slot-img m-0 p-0"
+                  [class.activeeq]="!item.name.includes('Starting')"
+                  [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <!-- HELMET -->
+          <div>
+            <div class="eq-container">
+              <div *ngFor="let item of helmetSlot" >
+                <div
+                class="eq-slot-hor m-0 p-0"
+                [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                [class.activeeq]="!item.name.includes('Starting')">
+                  <img
+                  class="eq-slot-img m-0 p-0"
+                  [class.activeeq]="!item.name.includes('Starting')"
+                  [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+         <!-- NECKLACE -->
+         <div>
+          <div class="eq-container">
+            <div *ngFor="let item of necklaceSlot" >
+              <div
+              class="eq-slot-hor m-0 p-0"
+              [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+              [class.activeeq]="!item.name.includes('Starting')">
+                <img
+                class="eq-slot-img m-0 p-0"
+                [class.activeeq]="!item.name.includes('Starting')"
+                [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+              </div>
+            </div>
+          </div>
+        </div>
+        </td>
+      </tr>
+      <tr>
+      <tr>
+        <td>
+          <!-- GLOVES -->
+          <div>
+            <div class="eq-container">
+              <div *ngFor="let item of glovesSlot" >
+                <div
+                class="eq-slot-hor m-0 p-0"
+                [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                [class.activeeq]="!item.name.includes('Starting')">
+                  <img
+                  class="eq-slot-img m-0 p-0"
+                  [class.activeeq]="!item.name.includes('Starting')"
+                  [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <!-- PLATE -->
+          <div>
+            <div class="eq-container">
+              <div *ngFor="let item of armorSlot" >
+                <div
+                class="eq-slot-hor m-0 p-0"
+                [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                [class.activeeq]="!item.name.includes('Starting')">
+                  <img
+                  class="eq-slot-img m-0 p-0"
+                  [class.activeeq]="!item.name.includes('Starting')"
+                  [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <!-- RING -->
+          <div>
+            <div class="eqcontainersmallest">
+              <div *ngFor="let item of ringSlot" >
+                <div
+                class="eq-slot-hor m-0 p-0"
+                [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                [class.activeeq]="!item.name.includes('Starting')">
+                  <img
+                  class="eq-slot-img m-0 p-0"
+                  [class.activeeq]="!item.name.includes('Starting')"
+                  [src]='item.img' (click)="onOpenDetails(item, 1)" title="You can drag & drop. Click me for more details.">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- RING -->
+          <div>
+            <div class="eqcontainersmallest">
+              <div *ngFor="let item of ringSlotTwo" >
+                <div
+                class="eq-slot-hor m-0 p-0"
+                [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                [class.activeeq]="!item.name.includes('Starting')">
+                  <img
+                  class="eq-slot-img m-0 p-0"
+                  [class.activeeq]="!item.name.includes('Starting')"
+                  [src]='item.img' (click)="onOpenDetails(item, 2)" title="You can drag & drop. Click me for more details.">
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <!-- BELT -->
+          <div>
+            <div class="eq-container">
+              <div *ngFor="let item of beltSlot" >
+                <div
+                class="eq-slot-hor m-0 p-0"
+                [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                [class.activeeq]="item.name !== 'Starting Belt'">
+                  <img
+                  class="eq-slot-img m-0 p-0"
+                  [class.activeeq]="!item.name.includes('Starting')"
+                  [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <!-- RING -->
+          <div>
+            <div class="eqcontainersmallest">
+              <div *ngFor="let item of ringSlotThree" >
+                <div
+                class="eq-slot-hor m-0 p-0"
+                [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                [class.activeeq]="!item.name.includes('Starting')">
+                  <img
+                  class="eq-slot-img m-0 p-0"
+                  [class.activeeq]="!item.name.includes('Starting')"
+                  [src]='item.img' (click)="onOpenDetails(item, 3)" title="You can drag & drop. Click me for more details.">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- RING -->
+          <div>
+            <div class="eqcontainersmallest">
+              <div *ngFor="let item of ringSlotFour" >
+                <div
+                class="eq-slot-hor m-0 p-0"
+                [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                [class.activeeq]="!item.name.includes('Starting')">
+                  <img
+                  class="eq-slot-img m-0 p-0"
+                  [class.activeeq]="!item.name.includes('Starting')"
+                  [src]='item.img' (click)="onOpenDetails(item, 4)" title="You can drag & drop. Click me for more details.">
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <!-- LEFT HAND -->
+          <div>
+            <div class="eq-container">
+              <div *ngFor="let item of leftHandSlot" >
+                <div
+                class="eq-slot-hor m-0 p-0"
+                [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                [class.activeeq]="!item.name.includes('Starting')">
+                  <img
+                  class="eq-slot-img m-0 p-0"
+                  [class.activeeq]="!item.name.includes('Starting')"
+                  [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <!-- LEGS -->
+          <div>
+            <div class="eq-container">
+              <div *ngFor="let item of legsSlot" >
+                <div
+                class="eq-slot-hor m-0 p-0"
+                [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                [class.activeeq]="!item.name.includes('Starting')">
+                  <img
+                  class="eq-slot-img m-0 p-0"
+                  [class.activeeq]="!item.name.includes('Starting')"
+                  [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <!-- RIGHT HAND -->
+          <div>
+            <div class="eq-container">
+              <div *ngFor="let item of rightHandSlot" >
+                <div
+                class="eq-slot-hor m-0 p-0"
+                [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                [class.activeeq]="!item.name.includes('Starting')">
+                  <img
+                  class="eq-slot-img m-0 p-0"
+                  [class.activeeq]="!item.name.includes('Starting')"
+                  [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <!-- BOOTS -->
+          <div>
+            <div class="eq-container">
+              <div *ngFor="let item of bootsSlot" >
+                <div
+                class="eq-slot-hor m-0 p-0"
+                [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                [class.activeeq]="!item.name.includes('Starting')">
+                  <img
+                  class="eq-slot-img m-0 p-0"
+                  [class.activeeq]="!item.name.includes('Starting')"
+                  [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <!-- HORSE -->
+          <div>
+            <div class="eq-container">
+              <div *ngFor="let item of horseSlot" >
+                <div
+                class="eq-slot-hor m-0 p-0"
+                [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                [class.activeeq]="!item.name.includes('Starting')">
+                  <img
+                  class="eq-slot-img m-0 p-0"
+                  [class.activeeq]="!item.name.includes('Starting')"
+                  [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-md-4 p-0 m-0 background">
+    <div class="header-item text-center">Equipment Statictics</div>
+    <div>
+      <cdk-virtual-scroll-viewport itemSize="100" class="example-viewport" [ngStyle]="{height: isMobile ? '100px' : '400px'}">
+        <table class="mx-auto my-auto w-100">
+          <ng-container *ngFor="let item of equipmentSkills">
+            <tr *ngIf="item.level">
+              <td class="skill-item m-0 p-1 pl-3 w-50">{{ item.name }}</td>
+              <td class="skill-item m-0 p-1 pl-3 w-50" style="color: gold"> {{ item.level }}</td>
+            </tr>
+          </ng-container>
+        </table>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  </div>
+</div>
+<div class="row m-0 p-0 h-100" *ngIf="isMobile">
+  <div class="col m-0 p-0">
+    <div class="row m-0 p-0">
+      <div class="col m-0 p-0 mx-auto my-auto">
+        <table class="mx-auto my-auto mt-2 mb-2">
+          <tr>
+            <td>
+              <!-- PADS -->
+              <div>
+                <div class="eqcontainersmall" [class.eqcontainersmallest]="isSmallestImg">
+                  <div *ngFor="let item of padsSlot">
+                    <div
+                    class="eq-slot-hor m-0 p-0"
+                    [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                    [class.activeeq]="!item.name.includes('Starting')">
+                      <img
+                      class="eq-slot-img m-0 p-0"
+                      [class.activeeq]="!item.name.includes('Starting')"
+                      [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <!-- HELMET -->
+              <div>
+                <div class="eqcontainersmall" [class.eqcontainersmallest]="isSmallestImg">
+                  <div *ngFor="let item of helmetSlot" >
+                    <div
+                    class="eq-slot-hor m-0 p-0"
+                    [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                    [class.activeeq]="!item.name.includes('Starting')">
+                      <img
+                      class="eq-slot-img m-0 p-0"
+                      [class.activeeq]="!item.name.includes('Starting')"
+                      [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+             <!-- NECKLACE -->
+             <div>
+              <div class="eqcontainersmall" [class.eqcontainersmallest]="isSmallestImg">
+                <div *ngFor="let item of necklaceSlot" >
+                  <div
+                  class="eq-slot-hor m-0 p-0"
+                  [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                  [class.activeeq]="!item.name.includes('Starting')">
+                    <img
+                    class="eq-slot-img m-0 p-0"
+                    [class.activeeq]="!item.name.includes('Starting')"
+                    [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                  </div>
+                </div>
+              </div>
+            </div>
+            </td>
+          </tr>
+          <tr>
+          <tr>
+            <td>
+              <!-- GLOVES -->
+              <div>
+                <div class="eqcontainersmall" [class.eqcontainersmallest]="isSmallestImg">
+                  <div *ngFor="let item of glovesSlot" >
+                    <div
+                    class="eq-slot-hor m-0 p-0"
+                    [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                    [class.activeeq]="!item.name.includes('Starting')">
+                      <img
+                      class="eq-slot-img m-0 p-0"
+                      [class.activeeq]="!item.name.includes('Starting')"
+                      [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <!-- PLATE -->
+              <div>
+                <div class="eqcontainersmall" [class.eqcontainersmallest]="isSmallestImg">
+                  <div *ngFor="let item of armorSlot" >
+                    <div
+                    class="eq-slot-hor m-0 p-0"
+                    [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                    [class.activeeq]="!item.name.includes('Starting')">
+                      <img
+                      class="eq-slot-img m-0 p-0"
+                      [class.activeeq]="!item.name.includes('Starting')"
+                      [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <!-- RING -->
+              <div>
+                <div class="eqcontainersmallest">
+                  <div *ngFor="let item of ringSlot" >
+                    <div
+                    class="eq-slot-hor m-0 p-0"
+                    [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                    [class.activeeq]="!item.name.includes('Starting')">
+                      <img
+                      class="eq-slot-img m-0 p-0"
+                      [class.activeeq]="!item.name.includes('Starting')"
+                      [src]='item.img' (click)="onOpenDetails(item, 1)" title="You can drag & drop. Click me for more details.">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- RING -->
+              <div>
+                <div class="eqcontainersmallest">
+                  <div *ngFor="let item of ringSlotTwo" >
+                    <div
+                    class="eq-slot-hor m-0 p-0"
+                    [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                    [class.activeeq]="!item.name.includes('Starting')">
+                      <img
+                      class="eq-slot-img m-0 p-0"
+                      [class.activeeq]="!item.name.includes('Starting')"
+                      [src]='item.img' (click)="onOpenDetails(item, 2)" title="You can drag & drop. Click me for more details.">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <!-- BELT -->
+              <div>
+                <div class="eqcontainersmall" [class.eqcontainersmallest]="isSmallestImg">
+                  <div *ngFor="let item of beltSlot" >
+                    <div
+                    class="eq-slot-hor m-0 p-0"
+                    [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                    [class.activeeq]="item.name !== 'Starting Belt'">
+                      <img
+                      class="eq-slot-img m-0 p-0"
+                      [class.activeeq]="!item.name.includes('Starting')"
+                      [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <!-- RING -->
+              <div>
+                <div class="eqcontainersmallest">
+                  <div *ngFor="let item of ringSlotThree" >
+                    <div
+                    class="eq-slot-hor m-0 p-0"
+                    [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                    [class.activeeq]="!item.name.includes('Starting')">
+                      <img
+                      class="eq-slot-img m-0 p-0"
+                      [class.activeeq]="!item.name.includes('Starting')"
+                      [src]='item.img' (click)="onOpenDetails(item, 3)" title="You can drag & drop. Click me for more details.">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- RING -->
+              <div>
+                <div class="eqcontainersmallest">
+                  <div *ngFor="let item of ringSlotFour" >
+                    <div
+                    class="eq-slot-hor m-0 p-0"
+                    [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                    [class.activeeq]="!item.name.includes('Starting')">
+                      <img
+                      class="eq-slot-img m-0 p-0"
+                      [class.activeeq]="!item.name.includes('Starting')"
+                      [src]='item.img' (click)="onOpenDetails(item, 4)" title="You can drag & drop. Click me for more details.">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <!-- LEFT HAND -->
+              <div>
+                <div class="eqcontainersmall" [class.eqcontainersmallest]="isSmallestImg">
+                  <div *ngFor="let item of leftHandSlot" >
+                    <div
+                    class="eq-slot-hor m-0 p-0"
+                    [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                    [class.activeeq]="!item.name.includes('Starting')">
+                      <img
+                      class="eq-slot-img m-0 p-0"
+                      [class.activeeq]="!item.name.includes('Starting')"
+                      [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <!-- LEGS -->
+              <div>
+                <div class="eqcontainersmall" [class.eqcontainersmallest]="isSmallestImg">
+                  <div *ngFor="let item of legsSlot" >
+                    <div
+                    class="eq-slot-hor m-0 p-0"
+                    [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                    [class.activeeq]="!item.name.includes('Starting')">
+                      <img
+                      class="eq-slot-img m-0 p-0"
+                      [class.activeeq]="!item.name.includes('Starting')"
+                      [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <!-- RIGHT HAND -->
+              <div>
+                <div class="eqcontainersmall" [class.eqcontainersmallest]="isSmallestImg">
+                  <div *ngFor="let item of rightHandSlot" >
+                    <div
+                    class="eq-slot-hor m-0 p-0"
+                    [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                    [class.activeeq]="!item.name.includes('Starting')">
+                      <img
+                      class="eq-slot-img m-0 p-0"
+                      [class.activeeq]="!item.name.includes('Starting')"
+                      [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <!-- BOOTS -->
+              <div>
+                <div class="eqcontainersmall" [class.eqcontainersmallest]="isSmallestImg">
+                  <div *ngFor="let item of bootsSlot" >
+                    <div
+                    class="eq-slot-hor m-0 p-0"
+                    [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                    [class.activeeq]="!item.name.includes('Starting')">
+                      <img
+                      class="eq-slot-img m-0 p-0"
+                      [class.activeeq]="!item.name.includes('Starting')"
+                      [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <!-- HORSE -->
+              <div>
+                <div class="eqcontainersmall" [class.eqcontainersmallest]="isSmallestImg">
+                  <div *ngFor="let item of horseSlot" >
+                    <div
+                    class="eq-slot-hor m-0 p-0"
+                    [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                    [class.activeeq]="!item.name.includes('Starting')">
+                      <img
+                      class="eq-slot-img m-0 p-0"
+                      [class.activeeq]="!item.name.includes('Starting')"
+                      [src]='item.img' (click)="onOpenDetails(item, 0)" title="You can drag & drop. Click me for more details.">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="row m-0 p-0">
+      <div class="col p-0 m-0 background">
+        <div class="header-item text-center">Equipment Statictics</div>
+        <div>
+          <cdk-virtual-scroll-viewport itemSize="100" class="example-viewport" [ngStyle]="{height: isMobile ? (isSmallestImg ? '50px' : '100px') : '400px'}">
+            <table class="mx-auto my-auto w-100">
+              <ng-container *ngFor="let item of equipmentSkills">
+                <tr *ngIf="item.level">
+                  <td class="skill-item m-0 p-1 pl-3 w-50">{{ item.name }}</td>
+                  <td class="skill-item m-0 p-1 pl-3 w-50" style="color: gold"> {{ item.level }}</td>
+                </tr>
+              </ng-container>
+            </table>
+          </cdk-virtual-scroll-viewport>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

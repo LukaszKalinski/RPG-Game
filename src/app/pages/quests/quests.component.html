@@ -1,0 +1,82 @@
+<ng-container *ngIf="!isMobile">
+  <div class="row m-0 p-0">
+    <div class="col md-6 m-0 p-0">
+      <div class="container m-0 p-0 text-center">
+        <div class="header mt-1 mb-1">Quest List</div>
+        <div>
+          <cdk-virtual-scroll-viewport itemSize="100" class="example-viewport"  >
+            <div [@quests]="questList.length">
+              <div *ngFor="let quest of questList; let i = index" class="list">
+                <div class="" (click)="onSelectQuest(quest.questName, i, quest)">
+                  <div class="row m-0 p-0"  [class.questdone]="quest.isDone">
+                    <div class="col-md-2 m-0 p-0 my-auto mx-auto">
+                      <fa-icon [icon]="questDoneIcon" size="lg" *ngIf="quest.isDone" style="line-height: 50px;"></fa-icon>
+                    </div>
+                    <div class="col-md-8 m-0 p-0 my-auto">
+                      <div class="questTitle">
+                        {{quest.questName}} <span *ngIf="!quest.isUnlocked" style="font-style: italic; color: rgb(136, 49, 49); text-shadow: 0px 0px 5px white;"> (low level)</span>
+                      </div>
+                    </div>
+                    <div class="col-md-2 m-0 p-0 my-auto">
+                      <fa-icon [icon]="lockedIcon" size="lg" *ngIf="!quest.isOpened" style="line-height: 50px;"></fa-icon>
+                      <fa-icon [icon]="unlockedIcon" size="lg" *ngIf="quest.isOpened" style="line-height: 50px;"></fa-icon>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </cdk-virtual-scroll-viewport>
+        </div>
+      </div>
+    </div>
+    <div class="col md-6 m-0 p-0">
+      <app-single-quest [selectedQuest]="selectedQuest" [charQuestIndex]="charQuestIndex" [charQuestInfo]="charQuestInfo"></app-single-quest>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isMobile">
+  <div class="row m-0 p-0">
+    <div class="col m-0 p-0">
+      <div class="container m-0 p-0 text-center">
+        <div class="header mt-1 mb-1">
+          Quest List
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row m-0 p-0">
+    <div class="col m-0 p-0">
+      <div>
+        <cdk-virtual-scroll-viewport itemSize="100" class="example-viewport-mobile"  >
+          <div [@quests]="questList.length">
+            <div *ngFor="let quest of questList; let i = index" class="list">
+              <div class="" (click)="onSelectQuest(quest.questName, i, quest)">
+                <div class="row m-0 p-0"  [class.questdone]="quest.isDone">
+                  <div class="col m-0 p-0 my-auto mx-auto">
+                    <fa-icon [icon]="questDoneIcon" size="sm" *ngIf="quest.isDone" style="line-height: 50px;"></fa-icon>
+                  </div>
+                  <div class="col-8 m-0 p-0 my-auto">
+                    <div class="questTitle w-100 m-0 p-0" style="line-height: 50px;">
+                      {{quest.questName}} <span *ngIf="!quest.isUnlocked" style="font-style: italic; color: rgb(136, 49, 49)"> (low level)</span>
+                    </div>
+                  </div>
+                  <div class="col m-0 p-0 my-auto">
+                    <fa-icon [icon]="lockedIcon" size="sm" *ngIf="!quest.isOpened" style="line-height: 50px;"></fa-icon>
+                    <fa-icon [icon]="unlockedIcon" size="sm" *ngIf="quest.isOpened" style="line-height: 50px;"></fa-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </cdk-virtual-scroll-viewport>
+      </div>
+    </div>
+  </div>
+  <div class="row m-0 p-0 text-center mx-auto">
+    <div class="col m-0 mt-1 p-0 text-center mx-auto">
+      <app-single-quest [selectedQuest]="selectedQuest" [charQuestIndex]="charQuestIndex" [charQuestInfo]="charQuestInfo"></app-single-quest>
+    </div>
+  </div>
+</ng-container>
+

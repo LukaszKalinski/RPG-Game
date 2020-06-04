@@ -1,0 +1,41 @@
+.background {
+  color: white;
+  width: 90%;
+  text-shadow: 0px 0px 5px black;
+}
+
+.header {
+  text-align: center;
+  font-size: 24px;
+}
+
+.headersub {
+  font-size: 16px;
+}
+
+img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.imgmobile {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.listitemcont {
+  padding: 2px;
+}
+
+.item {
+  display: inline-block;
+  text-shadow: 0px 0px 5px black;
+}
+
+.itemgold {
+  display: inline-block;
+  color: gold;
+  margin-right: 10px;
+}

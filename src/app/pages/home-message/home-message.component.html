@@ -1,0 +1,8 @@
+<div class="container" [class.mobilepos]="isMobile">
+  <div class="maintitle" [@mainTitleAppear]>RPG GAME</div>
+  <div class="mainsubtitle" [@secondTitleAppear]>Raise Your hero, defeat others!</div>
+  <div class="btn-group text-center mx-auto" [@buttonGroupAppear]>
+    <button class="btn btn-secondary" routerLink="/home/posts">News</button>
+    <button class="btn btn-secondary" routerLink="/home/login" *ngIf="!loggedUser">Login</button>
+  </div>
+</div>

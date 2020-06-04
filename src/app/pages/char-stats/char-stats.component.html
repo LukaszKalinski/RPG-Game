@@ -1,0 +1,138 @@
+<div class="row m-0 mb-1 p-0">
+  <div class="col m-0 p-0 background">
+    <table class="w-100 text-center">
+      <tr class="header-title">
+        <td class="w-25"> {{ characterInfo.generalInfo.profession }}</td>
+        <td class="w-50"> {{ characterInfo.generalInfo.name | uppercase }}</td>
+        <td class="w-25"> {{ characterInfo.attributes.level }} </td>
+      </tr>
+    </table>
+    <table class="w-100 text-center">
+      <ng-container *ngIf="turnSmallerView()">
+        <ng-container *ngFor="let item of skillsMainToDisplay; let i = index">
+          <tr *ngIf="i < 2">
+            <td class="w-25 header-item pl-2" [class.smallerfont]="turnSmallerFont()">{{ item.name }}</td>
+            <td class="w-50 pl-2 header-item  text-center" [class.smallerfont]="turnSmallerFont()" style="color: gold">
+              {{ item.level }} / {{ i === 0 ? hpMax : manaMax }}</td>
+            <td class="w-25">
+              <mat-progress-bar [class.blue-progress]="i === 1" mode="determinate"
+              [value]="item.percToNext"
+              ></mat-progress-bar>
+            </td>
+          </tr>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="!turnSmallerView()">
+        <ng-container *ngFor="let item of skillsMainToDisplay; let i = index">
+          <tr *ngIf="i < 2">
+            <td class="w-25 header-item pl-2" [class.smallerfont]="turnSmallerFont()">{{ item.name }}</td>
+            <td class="w-25 pl-2 header-item  text-center" [class.smallerfont]="turnSmallerFont()" style="color: gold">
+              {{ item.level }} / {{ i === 0 ? hpMax : manaMax }}</td>
+            <td class="w-50">
+              <mat-progress-bar [class.blue-progress]="i === 1" mode="determinate"
+              [value]="item.percToNext"
+              ></mat-progress-bar>
+            </td>
+          </tr>
+        </ng-container>
+      </ng-container>
+    </table>
+    <table class="w-100 text-center">
+      <tr>
+        <ng-container *ngFor="let item of skillsMainToDisplay; let i = index">
+          <ng-container *ngIf="i >= 2 && i < 5">
+            <td class="header-item pl-2" [class.smallerfont]="turnSmallerFont()">{{ item.name }}</td>
+            <td class="header-item" style="color: gold" [class.smallerfont]="turnSmallerFont()">{{ item.level }}</td>
+          </ng-container>
+        </ng-container>
+      </tr>
+      <tr>
+        <ng-container *ngFor="let item of skillsMainToDisplay; let i = index">
+          <ng-container *ngIf="i >= 5 && i < 8">
+            <td class="header-item pl-2" [class.smallerfont]="turnSmallerFont()">{{ item.name }}</td>
+            <td class="header-item" style="color: gold" [class.smallerfont]="turnSmallerFont()">{{ item.level }}</td>
+          </ng-container>
+        </ng-container>
+      </tr>
+    </table>
+    <hr>
+    <table class="w-100">
+      <ng-container *ngFor="let item of skillsToDisplay; let i = index">
+        <ng-container *ngIf="i <= 1">
+          <tr class='skill-item'>
+            <ng-container *ngIf="turnSmallerView()">
+              <td class="w-25 pl-2">{{ item.name }}</td>
+              <td class="w-50" style="color: gold; text-align: center;">
+                {{ valueDisplay(item.level) }} {{ item.name === 'Capacity' ? 'free oz.' : '' }} {{ item.name === 'Experience' ? 'p.' : '' }}
+              </td>
+              <td class="w-25">
+              <mat-progress-bar mode="determinate"
+              [value]="item.percToNext"
+              ></mat-progress-bar>
+              </td>
+            </ng-container>
+            <ng-container *ngIf="!turnSmallerView()">
+              <td class="w-25 pl-2">{{ item.name }}</td>
+              <td class="w-25" style="color: gold; text-align: center;">
+                {{ valueDisplay(item.level) }} {{ item.name === 'Capacity' ? 'free oz.' : '' }} {{ item.name === 'Experience' ? 'p.' : '' }}
+              </td>
+              <td class="w-50">
+              <mat-progress-bar mode="determinate"
+              [value]="item.percToNext"
+              ></mat-progress-bar>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
+      </ng-container>
+    </table>
+    <table class="w-100">
+      <tr>
+        <td class="w-50">
+          <table class="w-100 text-center">
+            <ng-container *ngFor="let item of skillsToDisplay; let i = index">
+              <ng-container *ngIf="i > 1 && i <= 9">
+                <tr *ngIf="item.name ==='Sword'" class="skill-title">
+                  <td class="w-90 pl-2" style="color: gold;">{{'Fighting'}}</td><td></td><td></td>
+                </tr>
+                <tr class='skill-item'>
+                  <td class="w-25 pl-2">{{ item.name }}</td>
+                  <td class="w-25" style="color: gold; text-align: center;">
+                    {{ item.level }} {{ item.name === 'Capacity' ? 'free oz.' : '' }} {{ item.name === 'Experience' ? 'p.' : '' }}
+                  </td>
+                  <td class="w-50">
+                    <mat-progress-bar mode="determinate"
+                    [value]="item.percToNext"
+                    ></mat-progress-bar>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </table>
+        </td>
+        <td class="w-50">
+          <table class="w-100 text-center">
+            <ng-container *ngFor="let item of skillsToDisplay; let i = index">
+              <ng-container *ngIf="i > 9">
+                <tr *ngIf="item.name ==='Woodcutting'" class="skill-title">
+                  <td class="w-90 pl-2" style="color: gold;">{{'Crafting'}}</td><td></td><td></td>
+                </tr>
+                <tr class='skill-item'>
+                  <td class="w-25 pl-2">{{ item.name }}</td>
+                  <td class="w-25" style="color: gold; text-align: center;">
+                    {{ item.level }} {{ item.name === 'Capacity' ? 'free oz.' : '' }} {{ item.name === 'Experience' ? 'p.' : '' }}
+                  </td>
+                  <td class="w-50">
+                    <mat-progress-bar mode="determinate"
+                    [value]="item.percToNext"
+                    ></mat-progress-bar>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

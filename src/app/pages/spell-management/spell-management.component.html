@@ -1,0 +1,36 @@
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col m-0 p-0 text-center btn-group">
+    <button class="btn btn-success" (click)="loadAllItemsFromServer()">Load all from Server</button>
+    <button class="btn btn-warning" (click)="sendAllItemsToServer(allSpells)">Send all to Server</button>
+    <button class="btn btn-danger" (click)="saveParticularItemInfo()">Save changes to Record</button>
+    <button class="btn btn-info" (click)="createNewItem()">Create New Record</button>
+  </div>
+</div>
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col-md-1 m-0 p-0 mx-auto my-auto">
+    <fa-icon [icon]="leftIcon" size="3x" (click)="goBack()" style="color: white"></fa-icon>
+  </div>
+  <div class="col md-10 m-0 p-0">
+    <div style="color: white" class="w-100">
+      {{ allSpells[itemIndex].name }}
+    </div>
+    <ng-container *ngFor="let item of selectedItem; let i = index">
+      <div class="skillcont" *ngIf="item[0] !== 'name'">
+        {{ item[0] }} / <span style="color: gold">{{ item[1] }}</span>
+      </div>
+    </ng-container>
+  </div>
+  <div class="col-md-1 m-0 p-0 mx-auto my-auto">
+    <fa-icon [icon]="rightIcon" size="3x" (click)="goForward()" style="color: white"></fa-icon>
+  </div>
+</div>
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">Name:</div><input [(ngModel)]="itemName"></div>
+    <div class="itemcont"><div class="item">Mana:</div><input [(ngModel)]="itemMana"></div>
+    <div class="itemcont"><div class="item">Effect:</div><input [(ngModel)]="itemEffect"></div>
+    <div class="itemcont"><div class="item">Percentage:</div><input [(ngModel)]="itemPerc"></div>
+    <div class="itemcont"><div class="item">Req Lev:</div><input [(ngModel)]="itemReqLev"></div>
+    <div class="itemcont"><div class="item">Proffesion:</div><input [(ngModel)]="itemProf"></div>
+  </div>
+</div>

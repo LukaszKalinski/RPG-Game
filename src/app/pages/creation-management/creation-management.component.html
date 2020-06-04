@@ -1,0 +1,49 @@
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col m-0 p-0 text-center btn-group">
+    <button class="btn btn-success" (click)="loadAllItemsFromServer()">Load all from Server</button>
+    <button class="btn btn-warning" (click)="sendAllItemsToServer(allCreations)">Send all to Server</button>
+    <button class="btn btn-danger" (click)="saveParticularItemInfo()">Save changes to Record</button>
+    <button class="btn btn-info" (click)="createNewItem()">Create New Record</button>
+  </div>
+</div>
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col-md-1 m-0 p-0 mx-auto my-auto">
+    <fa-icon [icon]="leftIcon" size="3x" (click)="goBack()" style="color: white"></fa-icon>
+  </div>
+  <div class="col md-10 m-0 p-0">
+    <div style="color: white" class="w-100">
+      {{ allCreations[itemIndex].name }}
+    </div>
+    <ng-container *ngFor="let item of selectedItem; let i = index">
+      <div class="skillcont" *ngIf="item[0] !== 'name' && item[0] !== 'needs'">
+        {{ item[0] }} / <span style="color: gold">{{ item[1] }}</span>
+      </div>
+    </ng-container>
+  </div>
+  <div class="col-md-1 m-0 p-0 mx-auto my-auto">
+    <fa-icon [icon]="rightIcon" size="3x" (click)="goForward()" style="color: white"></fa-icon>
+  </div>
+</div>
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">Name:</div><input [(ngModel)]="itemName"></div>
+    <div class="itemcont"><div class="item">Type:</div><input [(ngModel)]="itemType"></div>
+    <div class="itemcont"><div class="item">Product:</div><input [(ngModel)]="itemProduct"></div>
+    <div class="itemcont"><div class="item">Amount:</div><input [(ngModel)]="itemAmount"></div>
+    <div class="itemcont"><div class="item">Req Lev:</div><input [(ngModel)]="itemReqLvl"></div>
+    <div class="itemcont"><div class="item">Exp:</div><input [(ngModel)]="itemExp"></div>
+    <div class="itemcont"><div class="item">Base Time:</div><input [(ngModel)]="itemBaseTime"></div>
+  </div>
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">Needs(0) Name:</div><input [(ngModel)]="itemNeedsOne.name"></div>
+    <div class="itemcont"><div class="item">Needs(0) Amount:</div><input [(ngModel)]="itemNeedsOne.amount"></div>
+  </div>
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">Needs(1) Name:</div><input [(ngModel)]="itemNeedsTwo.name"></div>
+    <div class="itemcont"><div class="item">Needs(1) Amount:</div><input [(ngModel)]="itemNeedsTwo.amount"></div>
+  </div>
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">Needs(2) Name:</div><input [(ngModel)]="itemNeedsThree.name"></div>
+    <div class="itemcont"><div class="item">Needs(2) Amount:</div><input [(ngModel)]="itemNeedsThree.amount"></div>
+  </div>
+</div>

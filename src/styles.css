@@ -1,0 +1,52 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; }
+
+button {
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: rgb(134, 134, 248);
+  border: 1px solid rgb(96, 96, 255);
+  border-radius: 5px;
+}
+
+button.center {
+  position: relative;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, 0);
+}
+
+button:disabled {
+  background-color: rgb(145, 198, 250);
+  border: 1px solid rgb(142, 142, 245);
+}
+
+button:not([disabled]):hover {
+  background-color: gold;
+  border: 1px solid goldenrod;
+}
+
+.eqlevelone {
+  border: 2px solid green;
+}
+
+.eqleveltwo {
+  border: 2px solid blue;
+}
+
+.eqlevelthree {
+  border: 2px solid yellow;
+}
+
+.eqlevelfour {
+  border: 2px solid red;
+}
+
+.eqlevelfive {
+  border: 2px solid brown;
+}

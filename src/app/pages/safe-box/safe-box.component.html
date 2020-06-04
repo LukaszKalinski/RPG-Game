@@ -1,0 +1,123 @@
+<app-singleitem [item]="selectedItem" [isEquipped]="false" [isDungInv]="isDungInv" [isShop]="false" *ngIf="selectedItem" (itemClosed)="onCloseItem()"></app-singleitem>
+
+<ng-container *ngIf="!isMobile">
+  <div class="w-100 m-0 mt-1 pb-1 p-0" (window:resize)="onResize($event)">
+    <div class="row m-0 p-0">
+      <div class="col-md-1 text-center">
+        <fa-icon [icon]="leftIcon" size="2x" (click)="goBack('inventory')" class="icon"></fa-icon>
+      </div>
+      <div class="col-md-10 m-0 p-0">
+        <div cdkDropList id="inventoryContainer" cdkDropListOrientation="horizontal" class="example-list m-0 mt-1 mb-1 p-0 mx-auto" [cdkDropListData]="slidesBox[pageBox]"
+        cdkDropListConnectedTo="['dungInventoryContainer']" (cdkDropListDropped)="unEquipItem($event)">
+          <div *ngFor="let item of slidesBox[pageBox]" cdkDrag [cdkDragDisabled]="item.name === 'Gold Coin'">
+            <div
+            class="example-box m-0 p-0"
+            [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+            >
+              <div class="listitemcont">
+                <span *ngIf="item.stackable  && !selectedItem" class="badge">{{ displayValue(item.amount) }}</span>
+                <img class="eq-slot-img" [class.trainingitem]="item.name.includes('Starting')" [src]='item.img' (click)="onOpenDetails(item, false)" title="You can drag & drop. Click me for more details.">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1 text-center">
+        <fa-icon [icon]="rightIcon" size="2x" (click)="goForward('inventory')" class="icon"></fa-icon>
+      </div>
+    </div>
+
+    <div class="row m-0 p-0">
+      <div class="col-md-1 text-center">
+        <fa-icon [icon]="leftIcon" size="2x" (click)="goBack('backpack')" class="icon"></fa-icon>
+      </div>
+      <div class="col-md-10 m-0 p-0">
+        <div cdkDropList id="dungInventoryContainer" cdkDropListOrientation="horizontal" class="example-list m-0 mt-1 mb-1 p-0 mx-auto" [cdkDropListData]="slidesBp[pageBp]"
+        cdkDropListConnectedTo="['inventoryContainer']" (cdkDropListDropped)="unEquipItem($event)">
+          <div *ngFor="let item of slidesBp[pageBp]" cdkDrag [cdkDragDisabled]="item.name === 'Starting Potion'">
+            <div
+            class="example-box m-0 p-0"
+            [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+            >
+              <div class="listitemcont">
+                <span *ngIf="item.stackable && !selectedItem" class="badge">{{ displayValue(item.amount) }}</span>
+                <img class="eq-slot-img" [class.trainingitem]="item.name.includes('Starting')" [src]='item.img' (click)="onOpenDetails(item, true)" title="You can drag & drop. Click me for more details.">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1 text-center">
+        <fa-icon [icon]="rightIcon" size="2x" (click)="goForward('backpack')" class="icon"></fa-icon>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isMobile">
+  <div class="w-100 m-0 mt-1 pb-1 p-0" (window:resize)="onResize($event)">
+    <div class="row m-0 mt-1 p-0">
+      <div class="col m-0 p-0 text-center header">
+        Your Inventory
+      </div>
+    </div>
+    <div class="row m-0 mt-1 p-0">
+      <div class="col m-0 p-0">
+        <div cdkDropList id="inventoryContainer" cdkDropListOrientation="horizontal" class="example-list m-0 mt-1 mb-1 p-0 mx-auto" [cdkDropListData]="slidesBox[pageBox]"
+        cdkDropListConnectedTo="['dungInventoryContainer']" (cdkDropListDropped)="unEquipItem($event)">
+          <div *ngFor="let item of slidesBox[pageBox]" cdkDrag [cdkDragDisabled]="item.name === 'Gold Coin'">
+            <div
+            class="example-box m-0 p-0"
+            [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+            >
+              <div class="listitemcont">
+                <span *ngIf="item.stackable && !selectedItem" class="badge">{{ displayValue(item.amount) }}</span>
+                <img class="eq-slot-img" [class.trainingitem]="item.name.includes('Starting')" [src]='item.img' (click)="onOpenDetails(item, false)" title="You can drag & drop. Click me for more details.">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row m-0 mt-1 p-0">
+      <div class="col text-center">
+        <fa-icon [icon]="leftIcon" size="2x" (click)="goBack('inventory')" class="icon"></fa-icon>
+      </div>
+      <div class="col text-center">
+        <fa-icon [icon]="rightIcon" size="2x" (click)="goForward('inventory')" class="icon"></fa-icon>
+      </div>
+    </div>
+
+    <div class="row m-0 mt-1 p-0">
+      <div class="col m-0 p-0 text-center header">
+        Your Travelling Backpack
+      </div>
+    </div>
+    <div class="row m-0 mt-1 p-0">
+      <div class="col m-0 p-0">
+        <div cdkDropList id="dungInventoryContainer" cdkDropListOrientation="horizontal" class="example-list m-0 mt-1 mb-1 p-0 mx-auto" [cdkDropListData]="slidesBp[pageBp]"
+        cdkDropListConnectedTo="['inventoryContainer']" (cdkDropListDropped)="unEquipItem($event)">
+          <div *ngFor="let item of slidesBp[pageBp]" cdkDrag [cdkDragDisabled]="item.name === 'Starting Potion'">
+            <div
+            class="example-box m-0 p-0"
+            [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+            >
+              <div class="listitemcont">
+                <span *ngIf="item.stackable && !selectedItem" class="badge">{{ displayValue(item.amount) }}</span>
+                <img class="eq-slot-img" [class.trainingitem]="item.name.includes('Starting')" [src]='item.img' (click)="onOpenDetails(item, true)" title="You can drag & drop. Click me for more details.">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row m-0 mt-1 p-0">
+      <div class="col text-center">
+        <fa-icon [icon]="leftIcon" size="2x" (click)="goBack('backpack')" class="icon"></fa-icon>
+      </div>
+      <div class="col text-center">
+        <fa-icon [icon]="rightIcon" size="2x" (click)="goForward('backpack')" class="icon"></fa-icon>
+      </div>
+    </div>
+  </div>
+</ng-container>

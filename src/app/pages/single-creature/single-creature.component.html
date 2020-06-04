@@ -1,0 +1,43 @@
+<div class="backdrop" (click)="onClose()"></div>
+<div class="container"
+[class.mobile]="isMobile"
+[ngClass]="{'creaturelevelone' : creature.rarity === 1, 'creatureleveltwo' : creature.rarity === 2, 'creaturelevelthree' : creature.rarity === 3, 'creaturelevelfour' : creature.rarity === 4, 'creaturelevelfive' : creature.rarity === 5}"
+>
+  <div class="row m-0 p-0">
+    <div class="name w-100 text-center">
+      {{ creature.name | uppercase}}
+    </div>
+    <div class="m-0 mt-1 mb-1 p-0 w-100 text-center">
+      <img [class.smallestimg]="isSmallest" [src]="creature.image">
+    </div>
+    <div class="desc w-100">
+      {{ 'Description:' }}
+    </div>
+    <div class="desc w-100" style="color: gold">
+      {{ creature.desc }}
+    </div>
+    <ng-container *ngFor="let info of stringCreature">
+      <ng-container *ngIf="info.item && !(info.name === 'Defence' || info.name === 'Attack' || info.name === 'Type' || info.name === 'loot' || info.name === 'Dungeon' || info.name === 'Image' || info.name === 'Name' || info.name === 'Description' || info.name === 'Rarity')">
+        <p class="desc my-auto">
+          <span>{{ info.name }}:</span>
+        </p>
+        <p class="desc my-auto">
+          <span style="color: gold">{{ info.item }}</span>
+        </p>
+      </ng-container>
+    </ng-container>
+    <div class="desc my-auto">
+      <span>{{ 'Loot: ' }}:</span>
+    </div>
+    <div class="desc my-auto">
+      <span class="desc" style="color: gold" *ngFor="let loot of creature.loot">
+        {{ loot.item }},
+      </span>
+    </div>
+    <div class="w-100"  style="text-align: right;">
+      <button class="btn btn-primary" (click)="onFightCreature()">Fight!</button>
+    </div>
+  </div>
+</div>
+
+<div (window:resize)="onResize()"></div>

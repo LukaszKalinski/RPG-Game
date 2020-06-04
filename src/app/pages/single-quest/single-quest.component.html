@@ -1,0 +1,101 @@
+<div class="background m-0 p-0" *ngIf="!isMobile">
+  <div class="row m-0 mt-1 p-0">
+    <div class="col m-0 p-0 mx-auto">
+      <div class="header">Quest: <span style="color: gold">{{charQuestInfo.questName}}</span></div>
+      <div class="headerSub ml-1">Description: <p style="color: gold" [innerHTML]="boldText()"></p></div>
+      <div class="headerSub ml-1">This quest is <span style="color: gold">{{selectedQuest.isRenewable ? 'renewable' : 'not renewable'}}</span>.</div>
+    </div>
+  </div>
+  <div class="row m-0 p-0">
+    <div class="col m-0 p-0">
+      <div class="header">Tasks:</div>
+      <div class="listitemcont ml-1" *ngFor="let item of charQuestInfo.toDoCurrent; let i = index">
+        <ng-container *ngFor="let item2 of selectedQuest.toDo; let j = index">
+          <div *ngIf="i === j">
+            <div class="item">
+              <img  [src]="getCreatureImage(item.name)">
+              <div class="itemgold">
+                {{item.name}}
+              </div>
+              <span> - </span>
+              <span *ngIf="characterInfo.questsInfo[charQuestIndex].isOpened" style="color: gold">{{item.amount}}</span>
+              <span *ngIf="characterInfo.questsInfo[charQuestIndex].isOpened"> of </span>
+              <span> {{item2.amount}} kills</span>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="col m-0 p-0">
+      <div class="header">Rewards:</div>
+      <div class="listitemcont ml-1" *ngFor="let item of selectedQuest.rewards">
+        <div class="item">
+          <img  [src]="getLootImage(item.name)">
+          <div class="itemgold">
+            {{item.name}}
+          </div>
+          <span> - {{ displayValue(item.amount) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row m-0 mt-1 p-0">
+    <div class="col m-0 p-0 btn-group text-center mx-auto">
+      <button class="btn btn-success" (click)="onClaimRewards()" [disabled]="charQuestInfo.isDone === false" *ngIf="charQuestInfo.isOpened">Claim rewards</button>
+      <button class="btn btn-warning" (click)="onReopen()" *ngIf="charQuestInfo.isDone && selectedQuest.isRenewable">Reopen</button>
+      <button class="btn btn-warning" (click)="onOpenQuest()" *ngIf="charQuestInfo.isUnlocked && !charQuestInfo.isDone && !charQuestInfo.isOpened">Open</button>
+    </div>
+  </div>
+</div>
+
+<div class="background m-0 p-0 text-center mx-auto" *ngIf="isMobile">
+  <div class="row m-0 mt-1 p-0 text-center mx-auto">
+    <div class="col m-0 p-0 text-center mx-auto">
+      <div class="header">Quest: <span style="color: gold">{{charQuestInfo.questName}}</span></div>
+      <div class="headerSub ml-1">This quest is <span style="color: gold">{{selectedQuest.isRenewable ? 'renewable' : 'not renewable'}}</span>.</div>
+    </div>
+  </div>
+  <div class="row m-0 p-0">
+    <div class="col m-0 p-0">
+      <div class="header text-center mx-auto">Tasks:</div>
+      <div class="listitemcont ml-1" style="text-align: left;"style="text-align: left;" *ngFor="let item of charQuestInfo.toDoCurrent; let i = index">
+        <ng-container *ngFor="let item2 of selectedQuest.toDo; let j = index">
+          <div *ngIf="i === j">
+            <div class="item" >
+              <div class="itemgold">
+                {{item.name}}
+              </div>
+              <span *ngIf="!isSmallest"> - </span>
+              <span *ngIf="isSmallest"> - <br></span>
+              <span *ngIf="characterInfo.questsInfo[charQuestIndex].isOpened" style="color: gold">{{item.amount}}</span>
+              <span *ngIf="characterInfo.questsInfo[charQuestIndex].isOpened"> /</span>
+              <span> {{item2.amount}}</span>
+              <span *ngIf="!characterInfo.questsInfo[charQuestIndex].isOpened"> kills</span>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="col m-0 p-0 ">
+      <div class="header text-center mx-auto">Rewards:</div>
+      <div class="listitemcont ml-1" style="text-align: left;" *ngFor="let item of selectedQuest.rewards">
+        <div class="item" >
+          <div class="itemgold">
+            {{item.name}}
+          </div>
+          <span *ngIf="!isSmallest"> - {{ displayValue(item.amount) }}</span>
+          <span *ngIf="isSmallest"> - <br>{{ displayValue(item.amount) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row m-0 mt-1 p-0 text-center mx-auto">
+    <div class="col m-0 p-0 btn-group text-center mx-auto">
+      <button class="btn btn-success" (click)="onClaimRewards()" [disabled]="charQuestInfo.isDone === false" *ngIf="charQuestInfo.isOpened">Claim rewards</button>
+      <button class="btn btn-warning" (click)="onReopen()" *ngIf="charQuestInfo.isDone && selectedQuest.isRenewable">Reopen</button>
+      <button class="btn btn-warning" (click)="onOpenQuest()" *ngIf="charQuestInfo.isUnlocked && !charQuestInfo.isDone && !charQuestInfo.isOpened">Open</button>
+    </div>
+  </div>
+</div>
+
+<div (window:resize)="onResize()"></div>

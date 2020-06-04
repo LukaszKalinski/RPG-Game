@@ -1,0 +1,66 @@
+.example-viewport{
+  margin: auto;
+  height: 80vh;
+  width: 90%;
+  display: flex;
+ }
+
+ .example-viewport-mobile{
+  margin: auto;
+  height: 100px;
+  width: 90%;
+  display: flex;
+ }
+
+ .list{
+  height: 50px;
+  color: white;
+  justify-content: center;
+  align-items: center;
+ }
+
+ .list:hover:not(.active) {
+  background-color: rgb(181, 181, 245, 0.4);
+}
+
+ .header {
+  margin: auto;
+  width: 90%;
+  font-size: 24px;
+  text-shadow: 0px 0px 5px black;
+  color: white;
+ }
+
+ .questTitle {
+  text-shadow: 0px 0px 5px black;
+  text-align: left;
+ }
+ .container{
+  margin-bottom: 40px;
+ }
+
+ /* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(78, 81, 247);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(102, 102, 238);
+}
+
+.questdone {
+  background-color: rgb(89, 190, 89, 0.4);
+}

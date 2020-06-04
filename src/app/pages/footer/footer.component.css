@@ -1,0 +1,19 @@
+.footericon {
+  display: inline-block;
+  color: white;
+}
+
+.footericon:hover {
+  color: gold;
+}
+
+.footerText {
+  color: white;
+  line-height: 0px;
+  transform: translateY(20px);
+}
+
+.animated {
+  position: absolute;
+  left: 50%;
+}

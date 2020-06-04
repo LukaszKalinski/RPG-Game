@@ -1,0 +1,20 @@
+<div class="container text-center">
+  <div class="header-title">
+    Currently You are away!
+  </div>
+  <div class="header-title">
+    Dungeon: <span class="gold">{{ characterInfo.currentDungeon.location }}</span>
+  </div>
+  <div class="header-title">
+    Returning: <span class="gold">{{ getTime(characterInfo.currentDungeon.returnsTime) }}</span>
+  </div>
+  <div class="header-title">
+    Time left: <span class="gold">{{ timeLeft > 60 * 60 * 1000 ? getDate(timeLeft).getHours()-1 + ' : ' : '' }}{{ timeLeft > 60 * 1000   ? (getDate(timeLeft).getMinutes() !== 0 ? getDate(timeLeft).getMinutes() + ' : ' : '0 : ') : '' }}{{ getDate(timeLeft).getSeconds() }}</span>
+  </div>
+  <div class="">
+    <div  style="color: white; font-style: italic;" *ngIf="!(charSpeed * 1000 > timeLeft)">Immediatelly return after (
+      {{ timeLeft - charSpeed * 1000 > 60 * 60 * 1000 ? getDate(timeLeft - charSpeed * 1000).getHours()-1 + ' : ' : '' }}{{ timeLeft - charSpeed * 1000 > 60 * 1000   ? (getDate(timeLeft - charSpeed * 1000).getMinutes() !== 0 ? getDate(timeLeft - charSpeed * 1000).getMinutes() + ' : ' : '0 : ') : '' }}{{ getDate(timeLeft - charSpeed * 1000).getSeconds()}} )
+    </div>
+    <button class="btn btn-secondary" *ngIf="charSpeed * 1000 > timeLeft" (click)="onReturnImmediatelly()">Return immediatelly!</button>
+  </div>
+</div>

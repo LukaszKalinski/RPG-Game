@@ -1,0 +1,155 @@
+<ng-container *ngIf="!isMobile">
+  <button mat-button routerLink="/home">Home</button>
+  <button mat-button [matMenuTriggerFor]="inventory">Inventory</button>
+  <button mat-button [matMenuTriggerFor]="adventures">Adventures</button>
+  <button mat-button [matMenuTriggerFor]="collecting" *ngIf="!isShort()">Collecting</button>
+  <button mat-button [matMenuTriggerFor]="crafting" *ngIf="!isShort()">Crafting</button>
+  <button mat-button [matMenuTriggerFor]="creations" *ngIf="isShort()">Creations</button>
+  <button mat-button [matMenuTriggerFor]="manage" *ngIf="isAdmin()">Admin</button>
+
+  <mat-menu #inventory="matMenu" class="m-0 p-0">
+    <ng-container *ngFor="let item of menu">
+      <button mat-menu-item *ngIf="item.parent === 'inventory'" routerLink="{{ item.url }}">
+        <div class="row w-100 m-0 p-0">
+          <div class="col-md-3 my-auto m-0 p-0">
+            <fa-icon [icon]="item.icon" size="lg" style="float:left"></fa-icon>
+          </div>
+          <div class="col-md-9 my-auto m-0 p-0">
+            {{ item.name }}
+          </div>
+        </div>
+      </button>
+    </ng-container>
+  </mat-menu>
+
+  <mat-menu #adventures="matMenu">
+    <ng-container *ngFor="let item of menu">
+      <button mat-menu-item *ngIf="item.parent === 'adventures'" routerLink="{{ item.url }}">
+        <div class="row w-100 m-0 p-0">
+          <div class="col-md-3 my-auto m-0 p-0">
+            <fa-icon [icon]="item.icon" size="lg" style="float:left"></fa-icon>
+          </div>
+          <div class="col-md-9 my-auto m-0 p-0">
+            {{ item.name }}
+          </div>
+        </div>
+      </button>
+    </ng-container>
+  </mat-menu>
+
+  <mat-menu #crafting="matMenu">
+    <ng-container *ngFor="let item of menu">
+      <button mat-menu-item *ngIf="item.parent === 'crafting'" routerLink="{{ item.url }}" (click)="changeCreationType(item.creation)">
+        <div class="row w-100 m-0 p-0">
+          <div class="col-md-3 my-auto m-0 p-0">
+            <fa-icon [icon]="item.icon" size="lg" style="float:left"></fa-icon>
+          </div>
+          <div class="col-md-9 my-auto m-0 p-0">
+            {{ item.name }}
+          </div>
+        </div>
+      </button>
+    </ng-container>
+  </mat-menu>
+
+  <mat-menu #collecting="matMenu">
+    <ng-container *ngFor="let item of menu">
+      <button mat-menu-item *ngIf="item.parent === 'collecting'" routerLink="{{ item.url }}" (click)="changeCreationType(item.creation)">
+        <div class="row w-100 m-0 p-0">
+          <div class="col-md-3 my-auto m-0 p-0">
+            <fa-icon [icon]="item.icon" size="lg" style="float:left"></fa-icon>
+          </div>
+          <div class="col-md-9 my-auto m-0 p-0">
+            {{ item.name }}
+          </div>
+        </div>
+      </button>
+    </ng-container>
+  </mat-menu>
+
+  <mat-menu #creations="matMenu">
+    <ng-container *ngFor="let item of menu">
+      <button mat-menu-item *ngIf="item.parent === 'collecting' || item.parent === 'crafting'" routerLink="{{ item.url }}" (click)="changeCreationType(item.creation)">
+        <div class="row w-100 m-0 p-0">
+          <div class="col-md-3 my-auto m-0 p-0">
+            <fa-icon [icon]="item.icon" size="lg" style="float:left"></fa-icon>
+          </div>
+          <div class="col-md-9 my-auto m-0 p-0">
+            {{ item.name }}
+          </div>
+        </div>
+      </button>
+    </ng-container>
+  </mat-menu>
+
+  <mat-menu #manage="matMenu">
+    <ng-container *ngFor="let item of menu">
+      <button mat-menu-item *ngIf="item.parent === 'manage'" routerLink="{{ item.url }}">
+        <div class="row w-100 m-0 p-0">
+          <div class="col-md-3 my-auto m-0 p-0">
+            <fa-icon [icon]="item.icon" size="lg" style="float:left"></fa-icon>
+          </div>
+          <div class="col-md-9 my-auto m-0 p-0">
+            {{ item.name }}
+          </div>
+        </div>
+      </button>
+    </ng-container>
+  </mat-menu>
+</ng-container>
+
+<ng-container *ngIf="isMobile">
+  <button mat-button [matMenuTriggerFor]="mainmenu" class="menuicon">
+    <fa-icon [icon]="menuIcon" size="sm" class="my-auto"></fa-icon>
+  </button>
+
+  <mat-menu #mainmenu="matMenu" class="m-0 p-0">
+    <button mat-menu-item routerLink="/home">Home</button>
+    <button mat-menu-item [matMenuTriggerFor]="inventory">Inventory</button>
+    <button mat-menu-item [matMenuTriggerFor]="adventures">Adventures</button>
+    <button mat-menu-item [matMenuTriggerFor]="collecting">Collecting</button>
+    <button mat-menu-item [matMenuTriggerFor]="crafting">Crafting</button>
+    <button mat-menu-item [matMenuTriggerFor]="manage" *ngIf="isAdmin()">Management</button>
+  </mat-menu>
+
+  <mat-menu #inventory="matMenu" class="m-0 p-0">
+    <ng-container *ngFor="let item of menu">
+      <button mat-menu-item *ngIf="item.parent === 'inventory'" routerLink="{{ item.url }}">
+        {{ item.name }}
+      </button>
+    </ng-container>
+  </mat-menu>
+
+  <mat-menu #adventures="matMenu" class="m-0 p-0">
+    <ng-container *ngFor="let item of menu">
+      <button mat-menu-item *ngIf="item.parent === 'adventures'" routerLink="{{ item.url }}">
+        {{ item.name }}
+      </button>
+    </ng-container>
+  </mat-menu>
+
+  <mat-menu #collecting="matMenu" class="m-0 p-0">
+    <ng-container *ngFor="let item of menu">
+      <button mat-menu-item *ngIf="item.parent === 'collecting'" routerLink="{{ item.url }}" (click)="changeCreationType(item.creation)">
+        {{ item.name }}
+      </button>
+    </ng-container>
+  </mat-menu>
+
+  <mat-menu #crafting="matMenu" class="m-0 p-0">
+    <ng-container *ngFor="let item of menu">
+      <button mat-menu-item *ngIf="item.parent === 'crafting'" routerLink="{{ item.url }}" (click)="changeCreationType(item.creation)">
+        {{ item.name }}
+      </button>
+    </ng-container>
+  </mat-menu>
+
+  <mat-menu #manage="matMenu" class="m-0 p-0">
+    <ng-container *ngFor="let item of menu">
+      <button mat-menu-item *ngIf="item.parent === 'manage'" routerLink="{{ item.url }}">
+        {{ item.name }}
+      </button>
+    </ng-container>
+  </mat-menu>
+
+</ng-container>

@@ -1,0 +1,141 @@
+<app-travelling *ngIf="characterInfo.currentDungeon.location"></app-travelling>
+<app-travelling-collecting *ngIf="characterInfo.currentCreation.element"></app-travelling-collecting>
+
+<div class="row m-0 p-0" *ngIf="!characterInfo.currentDungeon.location && !characterInfo.currentCreation.element">
+  <ng-container *ngIf="!isMobile">
+    <div class="col-md-1 m-0 p-0 mx-auto my-auto text-center">
+      <fa-icon [icon]="leftIcon" size="3x" (click)="goBack()" style="color: white"></fa-icon>
+    </div>
+    <div class="col md-10 m-0 p-0 text-center">
+      <div [@entercards]="slides[page].length">
+        <ng-container *ngFor="let craft of slides[page]">
+          <div class="container m-1 ml-2">
+            <div class="name">
+              {{ craft.name}}
+            </div>
+            <div class="w-100 text-center m-1">
+              <img [class.smallestimg]="isSmallestImg" [src]="getProductImage(craft.product)">
+            </div>
+            <div class="w-100">
+              <p class="item">
+                Product:
+               </p>
+               <p class="item" style="color: gold">
+                 {{ craft.product}}
+               </p>
+            </div>
+            <div class="w-100" >
+              <p class="item">
+                {{ checkIfCraftingIsUnlocked(craft.name) ? 'Status:' : 'Required lev.:' }}
+               </p>
+               <p class="item" style="color: gold;">
+                 {{ checkIfCraftingIsUnlocked(craft.name) ? 'Unlocked' : craft.reqLv }}
+               </p>
+            </div>
+            <div class="w-100" >
+              <p class="item" style="width: 90%">
+                Required for creation:
+               </p>
+            </div>
+            <ng-container *ngFor="let item of craft.needs">
+              <div class="w-100" *ngIf="item && item.name !== ''">
+                <p class="item" style="color: gold;">
+                  {{ item.name }}:
+                 </p>
+                 <p class="item" style="color: gold;">
+                  {{ item.amount }}
+                </p>
+              </div>
+            </ng-container>
+            <div class="w-100" >
+              <p class="item">
+                Amount:
+               </p>
+               <p class="item" style="color: rgb(11, 100, 11)">
+                 <input min="0" [max]="maximumAmountToCraft(craft)" [placeholder]="'max: ' + maximumAmountToCraft(craft)" style="width: 100px" type="number" [(ngModel)]="selectedAmount" onKeyPress="if(this.value.length==2) return false;">
+               </p>
+            </div>
+            <div class="text-center w-100">
+              <button class="btn btn-secondary" (click)="setCrafting(craft)" [disabled]="!checkIfCraftingIsUnlocked(craft.name) || selectedAmount < 1 || selectedAmount === null || selectedAmount > maximumAmountToCraft(craft)">Start crafting!</button>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="col-md-1 m-0 p-0 mx-auto my-auto text-center">
+      <fa-icon [icon]="rightIcon" size="3x" (click)="goForward()" style="color: white"></fa-icon>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="isMobile">
+    <div class="col m-0 mt-1 p-0">
+      <div class="row m-0 p-0">
+        <div class="col m-0 mt-1 p-0 text-center mx-auto my-auto">
+          <div [@entercards]="slides[page].length">
+            <ng-container *ngFor="let craft of slides[page]">
+              <div class="container m-1 ml-2">
+                <div class="name">
+                  {{ craft.name}}
+                </div>
+                <div class="w-100 text-center m-1">
+                  <img [class.smallestimg]="isSmallestImg" [src]="getProductImage(craft.product)">
+                </div>
+                <div class="w-100">
+                  <p class="item">
+                    Product:
+                   </p>
+                   <p class="item" style="color: gold">
+                     {{ craft.product}}
+                   </p>
+                </div>
+                <div class="w-100" >
+                  <p class="item">
+                    {{ checkIfCraftingIsUnlocked(craft.name) ? 'Status:' : 'Required lev.:' }}
+                   </p>
+                   <p class="item" style="color: gold;">
+                     {{ checkIfCraftingIsUnlocked(craft.name) ? 'Unlocked' : craft.reqLv }}
+                   </p>
+                </div>
+                <div class="w-100" >
+                  <p class="item" style="width: 90%">
+                    Required for creation:
+                   </p>
+                </div>
+                <ng-container *ngFor="let item of craft.needs">
+                  <div class="w-100" *ngIf="item && item.name !== ''">
+                    <p class="item">
+                      {{ item.name }}:
+                     </p>
+                     <p class="item" style="color: gold;">
+                      {{ item.amount }}
+                    </p>
+                  </div>
+                </ng-container>
+                <div class="w-100" >
+                  <p class="item">
+                    Amount:
+                   </p>
+                   <p class="item" style="color: rgb(11, 100, 11)">
+                     <input min="0" [max]="maximumAmountToCraft(craft)" [placeholder]="'max: ' + maximumAmountToCraft(craft)" style="width: 100px" type="number" [(ngModel)]="selectedAmount" onKeyPress="if(this.value.length==2) return false;">
+                   </p>
+                </div>
+                <div class="text-center w-100">
+                  <button class="btn btn-secondary" (click)="setCrafting(craft)" [disabled]="!checkIfCraftingIsUnlocked(craft.name) || selectedAmount < 1 || selectedAmount === null || selectedAmount > maximumAmountToCraft(craft)">Start crafting!</button>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="row m-0 p-0 mx-auto my-auto">
+        <div class="col m-0 mt-1 p-0 mx-auto my-auto text-center">
+          <fa-icon [icon]="leftIcon" size="3x" (click)="goBack()" style="color: white"></fa-icon>
+        </div>
+        <div class="col m-0 mt-1 p-0 mx-auto my-auto text-center">
+          <fa-icon [icon]="rightIcon" size="3x" (click)="goForward()" style="color: white"></fa-icon>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<div (window:resize)="onResize()"></div>

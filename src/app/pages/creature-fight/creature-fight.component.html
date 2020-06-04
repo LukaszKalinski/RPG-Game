@@ -1,0 +1,207 @@
+<app-creature-fight-popup [loot]="wonLoot" *ngIf="!isFighting"></app-creature-fight-popup>
+
+<ng-container *ngIf="!isMobile">
+  <div class="row m-0 p-0">
+    <div class="col-md-12 m-0 mt-1 p-0">
+      <div class="row m-0 p-0">
+        <div class="col-md-6 m-0 p-0">
+          <div class="background ml-2 mr-1">
+            <div class="header-title">{{ this.characterInfo.generalInfo.name | uppercase}}</div>
+            <div class="header-item">
+              <mat-progress-bar mode="determinate" [value]="characterInfo.currentDungeonStats.charStats.hp / (characterInfo.attributes.hp + characterInfo.gamePlayInfo.extraHP ) * 100"></mat-progress-bar>
+              HP: {{ characterInfo.currentDungeonStats.charStats.hp }} / {{ (characterInfo.attributes.hp + characterInfo.gamePlayInfo.extraHP ) }}</div>
+            <div class="header-item">
+              <mat-progress-bar class="blue-progress" mode="determinate" [value]="characterInfo.currentDungeonStats.charStats.mana / (characterInfo.attributes.mana + characterInfo.gamePlayInfo.extraMana ) * 100"></mat-progress-bar>
+              MANA: {{ characterInfo.currentDungeonStats.charStats.mana }} / {{ (characterInfo.attributes.mana + characterInfo.gamePlayInfo.extraMana ) }}</div>
+          </div>
+        </div>
+        <div class="col-md-6 m-0 p-0">
+          <div class="background ml-2 mr-1">
+            <div class="header-title">{{ creatureFighting.name }}</div>
+            <div class="header-item">
+              <mat-progress-bar mode="determinate" [value]="creatureFighting.hp / serverCreature.hp * 100"></mat-progress-bar>
+              HP: {{ creatureFighting.hp }} / {{ serverCreature.hp }}</div>
+            <div class="header-item">
+              <mat-progress-bar class="blue-progress" mode="determinate" [value]="creatureFighting.mana / serverCreature.mana * 100"></mat-progress-bar>
+              MANA: {{ creatureFighting.mana }} / {{ serverCreature.mana }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="m-0 p-0">
+        <div class="actioncontainer text-center  p-0 mt-2 mb-2 ml-2 mr-1 pb-2 pt-2">
+          <div>
+            Possible Actions
+          </div>
+          <button *ngIf="characterInfo.generalInfo.profession === 'knight'" class="btn btn-info" (click)="changeAttackType('Melee')" [disabled]="(!isPlayerAttacking || !isFighting) || characterInfo.generalInfo.profession !== 'knight'">
+            <img src="https://static.thenounproject.com/png/483298-200.png" class="action-img">
+          </button>
+          <button *ngIf="characterInfo.generalInfo.profession === 'archer'" class="btn btn-info" (click)="changeAttackType('Melee')" [disabled]="(!isPlayerAttacking || !isFighting) || characterInfo.generalInfo.profession !== 'archer'">
+            <img src="https://static.thenounproject.com/png/101736-200.png" class="action-img">
+          </button>
+          <button *ngIf="characterInfo.generalInfo.profession === 'wizard'" class="btn btn-info" (click)="changeAttackType('Melee')" [disabled]="(!isPlayerAttacking || !isFighting) || characterInfo.generalInfo.profession !== 'wizard'">
+            <img src="https://static.thenounproject.com/png/45562-200.png" class="action-img">
+          </button>
+          <button class="btn btn-danger" (click)="changeAttackType('Rune')" [disabled]="!isPlayerAttacking || !isFighting">
+            <img src="https://static.thenounproject.com/png/2189269-200.png" class="action-img">
+          </button>
+          <button class="btn btn-success" (click)="changeAttackType('Potion')" [disabled]="!isPlayerAttacking || !isFighting">
+            <img src="https://static.thenounproject.com/png/638615-200.png" class="action-img">
+          </button>
+          <button class="btn btn-primary" (click)="changeAttackType('Mana')" [disabled]="!isPlayerAttacking || !isFighting" >
+            <img src="https://static.thenounproject.com/png/3028841-200.png" class="action-img">
+          </button>
+        </div>
+      </div>
+      <div class="row m-0 p-0">
+        <div class="col-md-12 m-0 p-0">
+          <div class="actioncontainer text-center  p-0 mt-2 mb-2 ml-2 mr-1 pb-2 pt-2">
+            <ng-container *ngFor="let spell of allSpells">
+              <div class="m-1 p-0"
+              style="display: inline-block;"
+              *ngIf="characterInfo.attributes.level >= spell.reqLev && (characterInfo.generalInfo.profession === spell.prof || spell.prof === 'Any');">
+                <button [disabled]="actionName !== 'Mana'" class="btn btn-primary" (click)="useItem('Mana', spell.name)">{{spell.name}}</button>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="row m-0 p-0">
+        <div class="col-md-12 m-0 p-0">
+          <div class="actioncontainer text-center  p-0 mt-2 mb-2 ml-2 mr-1 pb-2 pt-2">
+            <div>
+              Your Inventory
+            </div>
+            <div class="example-list m-0 mt-2 p-0 mx-auto">
+              <div *ngFor="let item of characterInfo.currentDungeonInventory.eq; let i = index">
+                <button
+                [disabled]="item.name.includes('Starting') || !(item.type === actionName)"
+                class="example-box m-0 p-0"
+                [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                >
+                  <div class="listitemcont">
+                    <span *ngIf="item.stackable" class="badge">{{ displayValue(item.amount) }}</span>
+                    <img class="eq-slot-img" [class.trainingitem]="item.name.includes('Starting') || item.type !== actionName" [src]='item.img' (click)="useItem(actionName, item.name)" title="Click me for use.">
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row m-0 p-0">
+    <div class="col-md-12 m-0 p-0 text-center mx-auto">
+      <div class="actioncontainer text-center mx-auto p-0 mt-2 mb-2 ml-2 mr-1 pb-2 pt-2" style="width: 95%">
+        <div>
+          Action History
+        </div>
+        <app-fightchatbox [chatboxMessages]="chatboxMessages"></app-fightchatbox>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isMobile">
+  <div>
+    <cdk-virtual-scroll-viewport itemSize="100" class="example-viewport">
+      <div class="row m-0 mt-1 p-0">
+        <div class="col background m-0 p-0">
+          <div class="background ml-2 mr-1">
+            <div class="header-title">{{ this.characterInfo.generalInfo.name | uppercase}}</div>
+            <div class="header-item">
+              <mat-progress-bar mode="determinate" [value]="characterInfo.currentDungeonStats.charStats.hp / (characterInfo.attributes.hp + characterInfo.gamePlayInfo.extraHP ) * 100"></mat-progress-bar>
+              HP: {{ characterInfo.currentDungeonStats.charStats.hp }} / {{ (characterInfo.attributes.hp + characterInfo.gamePlayInfo.extraHP ) }}</div>
+            <div class="header-item">
+              <mat-progress-bar class="blue-progress" mode="determinate" [value]="characterInfo.currentDungeonStats.charStats.mana / (characterInfo.attributes.mana + characterInfo.gamePlayInfo.extraMana ) * 100"></mat-progress-bar>
+              MANA: {{ characterInfo.currentDungeonStats.charStats.mana }} / {{ (characterInfo.attributes.mana + characterInfo.gamePlayInfo.extraMana ) }}</div>
+          </div>
+        </div>
+        <div class="col background m-0 p-0">
+          <div class="background ml-2 mr-1">
+            <div class="header-title">{{ creatureFighting.name }}</div>
+            <div class="header-item">
+              <mat-progress-bar mode="determinate" [value]="creatureFighting.hp / serverCreature.hp * 100"></mat-progress-bar>
+              HP: {{ creatureFighting.hp }} / {{ serverCreature.hp }}</div>
+            <div class="header-item">
+              <mat-progress-bar class="blue-progress" mode="determinate" [value]="creatureFighting.mana / serverCreature.mana * 100"></mat-progress-bar>
+              MANA: {{ creatureFighting.mana }} / {{ serverCreature.mana }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row m-0 p-0">
+        <div class="col m-0 p-0">
+          <div class="actioncontainer text-center  p-0 mt-2 mb-2 ml-1 mr-1 pb-2 pt-2">
+            <div>
+              Possible Actions
+            </div>
+            <button *ngIf="characterInfo.generalInfo.profession === 'knight'" class="btn btn-info" (click)="changeAttackType('Melee')" [disabled]="(!isPlayerAttacking || !isFighting) || characterInfo.generalInfo.profession !== 'knight'">
+              <img src="https://static.thenounproject.com/png/483298-200.png" class="action-mobile-img">
+            </button>
+            <button *ngIf="characterInfo.generalInfo.profession === 'archer'" class="btn btn-info" (click)="changeAttackType('Melee')" [disabled]="(!isPlayerAttacking || !isFighting) || characterInfo.generalInfo.profession !== 'archer'">
+              <img src="https://static.thenounproject.com/png/101736-200.png" class="action-mobile-img">
+            </button>
+            <button *ngIf="characterInfo.generalInfo.profession === 'wizard'" class="btn btn-info" (click)="changeAttackType('Melee')" [disabled]="(!isPlayerAttacking || !isFighting) || characterInfo.generalInfo.profession !== 'wizard'">
+              <img src="https://static.thenounproject.com/png/45562-200.png" class="action-mobile-img">
+            </button>
+            <button class="btn btn-danger" (click)="changeAttackType('Rune')" [disabled]="!isPlayerAttacking || !isFighting">
+              <img src="https://static.thenounproject.com/png/2189269-200.png" class="action-mobile-img">
+            </button>
+            <button class="btn btn-success" (click)="changeAttackType('Potion')" [disabled]="!isPlayerAttacking || !isFighting">
+              <img src="https://static.thenounproject.com/png/638615-200.png" class="action-mobile-img">
+            </button>
+            <button class="btn btn-primary" (click)="changeAttackType('Mana')" [disabled]="!isPlayerAttacking || !isFighting" >
+              <img src="https://static.thenounproject.com/png/3028841-200.png" class="action-mobile-img">
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row m-0 p-0" *ngIf="actionName === 'Mana'">
+        <div class="col m-0 p-0">
+          <div class="actioncontainer text-center  p-0 mt-2 mb-2 ml-2 mr-1 pb-2 pt-2">
+            <ng-container *ngFor="let spell of allSpells">
+              <div class="m-1 p-0"
+              style="display: inline-block;"
+              *ngIf="characterInfo.attributes.level >= spell.reqLev && (characterInfo.generalInfo.profession === spell.prof || spell.prof === 'Any');">
+                <button [disabled]="actionName !== 'Mana'" class="btn btn-primary" (click)="useItem('Mana', spell.name)">{{spell.name}}</button>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="row m-0 p-0">
+        <div class="col m-0 p-0">
+          <div class="actioncontainer text-center  p-0 mt-2 mb-2 ml-2 mr-1 pb-2 pt-2">
+            <div>
+              Your Inventory
+            </div>
+            <div class="example-list m-0 mt-2 p-0 mx-auto">
+              <div *ngFor="let item of characterInfo.currentDungeonInventory.eq; let i = index">
+                <button
+                [disabled]="item.name.includes('Starting') || !(item.type === actionName)"
+                class="example-box m-0 p-0"
+                [ngClass]="{'eqlevelone' : item.rarity === 1, 'eqleveltwo' : item.rarity === 2, 'eqlevelthree' : item.rarity === 3, 'eqlevelfour' : item.rarity === 4, 'eqlevelfive' : item.rarity === 5}"
+                >
+                  <div class="listitemcont">
+                    <span *ngIf="item.stackable" class="badge">{{ displayValue(item.amount) }}</span>
+                    <img class="eq-slot-img" [class.trainingitem]="item.name.includes('Starting') || item.type !== actionName" [src]='item.img' (click)="useItem(actionName, item.name)" title="Click me for use.">
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row m-0 p-0" >
+        <div class="col m-0 p-0 text-center">
+          <div class="actioncontainer text-center  p-0 mt-2 mb-2 ml-2 mr-1 pb-2 pt-2" style="width: 95%">
+            <div>
+              Action History
+            </div>
+            <app-fightchatbox [chatboxMessages]="chatboxMessages"></app-fightchatbox>
+          </div>
+        </div>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </div>
+</ng-container>

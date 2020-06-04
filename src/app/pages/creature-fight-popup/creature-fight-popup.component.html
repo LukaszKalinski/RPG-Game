@@ -1,0 +1,20 @@
+<div class="backdrop"></div>
+<div class="container" [class.mobile]="isMobile">
+  <div class="header-title">{{ characterInfo.gamePlayInfo.currHealth ===  0 ? 'You have Lost...' : 'You have WON!' }}</div>
+  <div class="header-desc">{{ characterInfo.gamePlayInfo.currHealth ===  0 ? 'Unfortunelly You have lost Your backpack...' : 'Please collect Your loot by clicking button or direct icon!' }}</div>
+  <div *ngFor="let item of loot; let i = index" class="listitemcont">
+    <button
+    (click)="takeSingleLoot(item.name, item.amount, i)"
+    [disabled]="(singleLootWeight(item.name, item.amount)) > freeCap"
+    >
+      <span *ngIf="getEquipment(item.name).stackable" class="badge">{{ displayValue(item.amount) }}</span>
+      <img [class.smallestimg]="isSmallestImg" [src]="getEquipment(item.name).img"/>
+    </button>
+  </div>
+  <div class="text-center m-1">
+    <button class="btn btn-success m-1" (click)="takeAllLoot()" [disabled]="loot.length === 0 || allLootWeight() > freeCap">Collect ALL</button>
+    <button class="btn btn-secondary m-1" (click)="onGoBack()">Go Back</button>
+  </div>
+</div>
+
+<div (window:resize)="onResize()"></div>

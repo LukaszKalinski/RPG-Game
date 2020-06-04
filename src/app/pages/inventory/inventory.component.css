@@ -1,0 +1,17 @@
+.header-title {
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+  font-size: 24px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: white;
+}
+
+::ng-deep .match-row {
+  background-color: rgb(125, 125, 230);
+  color: white;
+}
+
+::ng-deep .mat-tab-label,::ng-deep .mat-tab-labels {
+  background-color: rgb(125, 125, 230);
+}

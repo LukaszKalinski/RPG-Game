@@ -1,0 +1,159 @@
+<ng-container *ngIf="!isMobile">
+  <div class="row m-0 p-0">
+    <div class="col-md-4" [@nameAppear]>
+      <div class="arm-title w-100 mt-1">
+        {{ 'Character name'  | uppercase }}
+      </div>
+      <div class="arm-subtitle mt-1">
+        <div class="row m-0 p-0">
+          <div class="col-md-8 m-0 p-0">
+            <div class="text-center">
+              <input [disabled]="charCreateStep !== 0" class="input-field mt-1" placeholder="Name" [(ngModel)]="charName">
+            </div>
+          </div>
+          <div class="col-md-4 m-0 p-0 text-center my-auto">
+            <fa-icon [icon]="maleIcon" size="lg" (click)="onGenderChoice('male')" [class.genderactive]="gender === 'male'"></fa-icon>
+            <fa-icon [icon]="femaleIcon" class="ml-1" size="lg" (click)="onGenderChoice('female')" [class.genderactive]="gender === 'female'"></fa-icon>
+            <button type="button" class="btn btn-primary m-1 ml-2" (click)="onNextStep()" [disabled]="charCreateStep !== 0 || (charName === null || charName === '')">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4" [@nameAppear] *ngIf="charCreateStep > 0 ">
+      <div class="arm-title w-100 mt-1">
+        {{ 'Profession'  | uppercase }}
+      </div>
+      <div class="arm-subtitle mt-1">
+        <div class="row m-0 p-0">
+          <div class="col-md-9 m-0 p-0 mx-auto my-auto text-center">
+            {{ selectedProf ? (selectedProf | uppercase) : 'Select profession' }}
+          </div>
+          <div class="col-md-3 m-0 p-0">
+            <div style="text-align: right;">
+              <button type="button" class="btn btn-primary m-1" (click)="onNextStep()" [disabled]="charCreateStep !== 1 || !selectedProf">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4" [@nameAppear] *ngIf="charCreateStep > 1 ">
+      <div class="arm-title w-100 mt-1">
+        {{ 'Finalize '  | uppercase }}
+      </div>
+      <div class="arm-subtitle mt-1">
+        <div style="text-align: center;">
+          <button type="submit" class="btn btn-success m-1" (click)="onNextStep()" [disabled]="charCreateStep !== 2">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-1 m-0 p-0" *ngIf="charCreateStep === 1" [@nameAppear]>
+    <ng-container *ngFor="let item of coatOfArms">
+      <div class="col-md-4 arm" (click)="onArmIsClicked(item.prof)">
+        <div class="arm-title w-100">
+          {{ item.prof  | uppercase }}
+        </div>
+        <div *ngIf="!(profDescToDisplay === item.prof)">
+          <img [src]="item.url" class="arm-bcg-img">
+        </div>
+        <div class="arm-desc" *ngIf="(profDescToDisplay === item.prof)">
+         Health per level: <b><span style="color: gold">{{ profDescription[0][profDesc.indexOf(item.prof)] }}</span></b> <br>
+         Mana per level: <b><span style="color: gold">{{ profDescription[1][profDesc.indexOf(item.prof)] }}</span></b> <br>
+         Capacity per level: <b><span style="color: gold">{{ profDescription[2][profDesc.indexOf(item.prof)] }}</span></b> <br>
+         Speed per level: <b><span style="color: gold">{{ profDescription[3] }}</span></b> <br>
+         Strength per level: <b><span style="color: gold">{{ profDescription[4][profDesc.indexOf(item.prof)] }}</span></b> <br>
+         Accuracy per level: <b><span style="color: gold">{{ profDescription[5][profDesc.indexOf(item.prof)] }}</span></b> <br>
+         Magic per level: <b><span style="color: gold">{{ profDescription[6][profDesc.indexOf(item.prof)] }}</span></b> <br>
+         Preffered Weapon: <b><span style="color: gold">{{ profDescription[7][profDesc.indexOf(item.prof)] }}</span></b> <br>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isMobile">
+  <div class="row m-0 p-0" [@nameAppear]>
+    <div class="col m-0 p-0">
+      <div class="arm-title w-100 mt-1">
+        {{ 'Character name'  | uppercase }}
+      </div>
+      <div class="arm-subtitle mt-1">
+        <div class="row m-0 p-0">
+          <div class="col-9 m-0 p-0" *ngIf="charCreateStep === 0">
+            <div class="text-center" >
+              <input [disabled]="charCreateStep !== 0" class="input-field mt-1" placeholder="Name" [(ngModel)]="charName" >
+            </div>
+          </div>
+          <div class="col-3 m-0 p-0 text-center my-auto" *ngIf="charCreateStep === 0">
+            <fa-icon [icon]="maleIcon" size="lg" (click)="onGenderChoice('male')" [class.genderactive]="gender === 'male'"></fa-icon>
+            <fa-icon [icon]="femaleIcon" size="lg" (click)="onGenderChoice('female')" [class.genderactive]="gender === 'female'"></fa-icon>
+          </div>
+          <div class="col m-0 p-0 text-center arm-subtitle" *ngIf="charCreateStep !== 0">
+            {{ charName }}
+          </div>
+        </div>
+        <div style="text-align: right;" *ngIf="charCreateStep === 0">
+          <button type="button" class="btn btn-primary m-1" (click)="onNextStep()" [disabled]="charCreateStep !== 0 || (charName === null || charName === '')">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row m-0 p-0" *ngIf="charCreateStep !== 0" [@nameAppear]>
+    <div class="col m-0 p-0">
+      <div class="arm-title w-100 mt-1">
+        {{ 'Profession'  | uppercase }}
+      </div>
+      <div class="arm-subtitle mt-1">
+        <div class="row m-0 p-0">
+          <div class="col-md-9 m-0 p-0 mx-auto my-auto text-center">
+            {{ selectedProf ? (selectedProf | uppercase) : 'Select profession' }}
+          </div>
+          <div class="col-md-3 m-0 p-0">
+            <div style="text-align: right;" *ngIf="charCreateStep === 1">
+              <button type="button" class="btn btn-primary m-1" (click)="onNextStep()" [disabled]="charCreateStep !== 1 || !selectedProf">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row m-0 p-0" *ngIf="charCreateStep === 1" [@nameAppear]>
+    <ng-container *ngFor="let item of coatOfArms">
+      <div class="col arm" (click)="onArmIsClicked(item.prof)">
+        <div class="arm-title w-100">
+          {{ item.prof  | uppercase }}
+        </div>
+        <div>
+          <img [src]="item.url" class="arm-bcg-img">
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="row m-0 p-0" *ngIf="charCreateStep === 1 && profDescToDisplay" [@nameAppear]>
+    <ng-container *ngFor="let item of coatOfArms">
+      <div class="arm-desc" *ngIf="(profDescToDisplay === item.prof)">
+        Health per level: <b><span style="color: gold">{{ profDescription[0][profDesc.indexOf(item.prof)] }}</span></b> <br>
+        Mana per level: <b><span style="color: gold">{{ profDescription[1][profDesc.indexOf(item.prof)] }}</span></b> <br>
+        Capacity per level: <b><span style="color: gold">{{ profDescription[2][profDesc.indexOf(item.prof)] }}</span></b> <br>
+        Speed per level: <b><span style="color: gold">{{ profDescription[3] }}</span></b> <br>
+        Strength per level: <b><span style="color: gold">{{ profDescription[4][profDesc.indexOf(item.prof)] }}</span></b> <br>
+        Accuracy per level: <b><span style="color: gold">{{ profDescription[5][profDesc.indexOf(item.prof)] }}</span></b> <br>
+        Magic per level: <b><span style="color: gold">{{ profDescription[6][profDesc.indexOf(item.prof)] }}</span></b> <br>
+        Preffered Weapon: <b><span style="color: gold">{{ profDescription[7][profDesc.indexOf(item.prof)] }}</span></b> <br>
+       </div>
+    </ng-container>
+  </div>
+  <div class="row m-0 p-0" *ngIf="charCreateStep === 2" [@nameAppear]>
+    <div class="col m-0 p-0">
+      <div class="arm-title w-100 mt-1">
+        {{ 'Finalize '  | uppercase }}
+      </div>
+      <div class="arm-subtitle mt-1">
+        <div style="text-align: center;">
+          <button type="submit" class="btn btn-success m-1" (click)="onNextStep()" [disabled]="charCreateStep !== 2">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+

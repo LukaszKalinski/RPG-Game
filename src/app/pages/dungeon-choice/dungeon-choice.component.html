@@ -1,0 +1,114 @@
+<app-dungeon *ngIf="characterInfo.currentDungeon.location"></app-dungeon>
+<app-travelling-collecting *ngIf="characterInfo.currentCreation.element"></app-travelling-collecting>
+
+<ng-container *ngIf="!isMobile">
+  <div class="row m-0 p-0" *ngIf="!characterInfo.currentDungeon.location && !characterInfo.currentCreation.element">
+    <div class="col-md-1 m-0 p-0 mx-auto my-auto text-center">
+      <fa-icon [icon]="leftIcon" size="3x" (click)="goBack()" style="color: white"></fa-icon>
+    </div>
+    <div class="col md-10 m-0 p-0 text-center">
+      <div [@entercards]="slides[page].length">
+        <ng-container *ngFor="let dungeon of slides[page]">
+          <div class="container m-1 ml-1">
+            <div class="name">
+              {{ dungeon.name}}
+            </div>
+            <div class="w-100 text-center m-1">
+              <img [src]="dungeon.image">
+            </div>
+            <div class="w-100">
+              <p class="item">
+                Travelling time:
+               </p>
+               <p class="item" style="color: gold">
+                 {{ dungeon.travelingTime / 1000 }} s
+               </p>
+            </div>
+            <div class="w-100" *ngIf="!dungeon.isUnlocked">
+              <p class="item" style="color: rgb(230, 124, 124)">
+                Required level:
+               </p>
+               <p class="item" style="color: gold">
+                 {{ dungeon.reqLev }}
+               </p>
+            </div>
+            <div class="w-100" *ngIf="dungeon.isUnlocked">
+              <p class="item" style="color: rgb(82, 202, 82)">
+                Required level:
+               </p>
+               <p class="item" style="color: gold">
+                 {{ dungeon.reqLev }}
+               </p>
+            </div>
+            <div class="text-center w-100">
+              <button class="btn btn-secondary" routerLink="/home/dungeon" [disabled]="!dungeon.isUnlocked" (click)="setCharacterDungeonInfo(dungeon.name)">Start this Dungeon!</button>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="col-md-1 m-0 p-0 mx-auto my-auto text-center">
+      <fa-icon [icon]="rightIcon" size="3x" (click)="goForward()" style="color: white"></fa-icon>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isMobile">
+  <div class="row m-0 p-0" *ngIf="!characterInfo.currentDungeon.location && !characterInfo.currentCreation.element">
+    <div class="col m-0 mt-1 p-0">
+      <div class="row m-0 p-0">
+        <div class="col m-0 mt-1 p-0 text-center mx-auto my-auto">
+          <div [@entercards]="slides[page].length">
+            <ng-container *ngFor="let dungeon of slides[page]">
+              <div class="container m-1 ml-1">
+                <div class="name">
+                  {{ dungeon.name}}
+                </div>
+                <div class="w-100 text-center m-1">
+                  <img [src]="dungeon.image">
+                </div>
+                <div class="w-100">
+                  <p class="item">
+                    Travelling time:
+                  </p>
+                  <p class="item" style="color: gold">
+                    {{ dungeon.travelingTime / 1000 }} s
+                  </p>
+                </div>
+                <div class="w-100" *ngIf="!dungeon.isUnlocked">
+                  <p class="item" style="color: rgb(230, 124, 124)">
+                    Required level:
+                  </p>
+                  <p class="item" style="color: gold">
+                    {{ dungeon.reqLev }}
+                  </p>
+                </div>
+                <div class="w-100" *ngIf="dungeon.isUnlocked">
+                  <p class="item" style="color: rgb(82, 202, 82)">
+                    Required level:
+                  </p>
+                  <p class="item" style="color: gold">
+                    {{ dungeon.reqLev }}
+                  </p>
+                </div>
+                <div class="text-center w-100">
+                  <button class="btn btn-secondary" routerLink="/home/dungeon" [disabled]="!dungeon.isUnlocked" (click)="setCharacterDungeonInfo(dungeon.name)">Start this Dungeon!</button>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="row m-0 p-0 text-center mx-auto my-auto">
+        <div class="col m-0 mt-1 p-0 mx-auto my-auto text-center">
+          <fa-icon [icon]="leftIcon" size="3x" (click)="goBack()" style="color: white"></fa-icon>
+        </div>
+        <div class="col m-0 mt-1 p-0 mx-auto my-auto text-center">
+          <fa-icon [icon]="rightIcon" size="3x" (click)="goForward()" style="color: white"></fa-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<div (window:resize)="onResize()"></div>

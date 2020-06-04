@@ -1,0 +1,61 @@
+::ng-deep .blue-progress .mat-progress-bar-fill::after {
+  background-color: blue;
+}
+
+::ng-deep .mat-progress-bar-fill::after {
+  background-color: red;
+}
+
+::ng-deep .mat-progress-bar-buffer {
+  background: #E4E8EB;
+}
+
+.mat-progress-bar {
+  border: 1px solid grey;
+  border-radius: 2px;
+  margin: 2px;
+  height: 10px;
+  width: auto;
+}
+
+.background {
+  text-shadow: 0px 0px 5px black;
+}
+
+.header-title {
+  text-align: center;
+  padding: 10px;
+  font-size: 24px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: gold;
+}
+
+.header-item {
+  text-align: left;
+  padding: 1px;
+  font-size: 16px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-style: italic;
+  color: white;
+}
+
+.skill-title {
+  text-align: left;
+  padding: 10px;
+  font-size: 14px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: white;
+}
+
+.skill-item {
+  text-align: left;
+  padding: 10px;
+  font-size: 12px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-style: italic;
+  color: white;
+}
+
+.smallerfont {
+  font-size: 16px;
+}

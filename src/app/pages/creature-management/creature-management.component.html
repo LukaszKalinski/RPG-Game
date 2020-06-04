@@ -1,0 +1,69 @@
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col m-0 p-0 text-center btn-group">
+    <button class="btn btn-success" (click)="loadAllItemsFromServer()">Load all from Server</button>
+    <button class="btn btn-warning" (click)="sendAllItemsToServer(allCreatures)">Send all to Server</button>
+    <button class="btn btn-danger" (click)="saveParticularItemInfo()">Save changes to Record</button>
+    <button class="btn btn-info" (click)="createNewItem()">Create New Record</button>
+  </div>
+</div>
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col-md-1 m-0 p-0 mx-auto my-auto">
+    <fa-icon [icon]="leftIcon" size="3x" (click)="goBack()" style="color: white"></fa-icon>
+  </div>
+  <div class="col md-10 m-0 p-0">
+    <div style="color: white" class="w-100">
+      {{ allCreatures[itemIndex].name }}
+    </div>
+    <div style="color: white" class="w-100">
+      {{ allCreatures[itemIndex].image }}
+    </div>
+    <div style="color: white" class="w-100">
+      {{ allCreatures[itemIndex].desc }}
+    </div>
+
+    <ng-container *ngFor="let item of selectedItem; let i = index">
+      <div class="skillcont" *ngIf="item[0] !== 'name' && item[0] !== 'image' && item[0] !== 'loot' && item[0] !== 'desc'">
+        {{ item[0] }} / <span style="color: gold">{{ item[1] }}</span>
+      </div>
+    </ng-container>
+  </div>
+  <div class="col-md-1 m-0 p-0 mx-auto my-auto">
+    <fa-icon [icon]="rightIcon" size="3x" (click)="goForward()" style="color: white"></fa-icon>
+  </div>
+</div>
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">Name:</div><input [(ngModel)]="itemName"></div>
+    <div class="itemcont"><div class="item">Image:</div><input [(ngModel)]="itemImage"></div>
+    <div class="itemcont"><div class="item">Desc:</div><input [(ngModel)]="itemDesc"></div>
+    <div class="itemcont"><div class="item">Dungeon:</div><input [(ngModel)]="itemDungeon"></div>
+    <div class="itemcont"><div class="item">Rarity:</div><input [(ngModel)]="itemRarity"></div>
+    <div class="itemcont"><div class="item">Exp:</div><input [(ngModel)]="itemLevel"></div>
+    <div class="itemcont"><div class="item">Hp:</div><input [(ngModel)]="itemHP"></div>
+    <div class="itemcont"><div class="item">Mana:</div><input [(ngModel)]="itemMana"></div>
+    <div class="itemcont"><div class="item">Type:</div><input [(ngModel)]="itemType"></div>
+    <div class="itemcont"><div class="item">Attack:</div><input [(ngModel)]="itemAttack"></div>
+    <div class="itemcont"><div class="item">Defence:</div><input [(ngModel)]="itemDefence"></div>
+    <div class="itemcont"><div class="item">Res:</div><input [(ngModel)]="itemResistance"></div>
+    <div class="itemcont"><div class="item">Res Lvl:</div><input [(ngModel)]="itemResLvl"></div>
+  </div>
+
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">Loot(0) Name:</div><input [(ngModel)]="itemNeedsOne.item"></div>
+    <div class="itemcont"><div class="item">Loot(0) Prob.:</div><input [(ngModel)]="itemNeedsOne.probability"></div>
+    <div class="itemcont"><div class="item">Loot(0) minAmount:</div><input [(ngModel)]="itemNeedsOne.minAmount"></div>
+    <div class="itemcont"><div class="item">Loot(0) maxAmount:</div><input [(ngModel)]="itemNeedsOne.maxAmount"></div>
+  </div>
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">Loot(1) Name:</div><input [(ngModel)]="itemNeedsTwo.item"></div>
+    <div class="itemcont"><div class="item">Loot(1) Prob.:</div><input [(ngModel)]="itemNeedsTwo.probability"></div>
+    <div class="itemcont"><div class="item">Loot(1) minAmount:</div><input [(ngModel)]="itemNeedsTwo.minAmount"></div>
+    <div class="itemcont"><div class="item">Loot(1) maxAmount:</div><input [(ngModel)]="itemNeedsTwo.maxAmount"></div>
+  </div>
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">Loot(2) Name:</div><input [(ngModel)]="itemNeedsThree.item"></div>
+    <div class="itemcont"><div class="item">Loot(2) Prob.:</div><input [(ngModel)]="itemNeedsThree.probability"></div>
+    <div class="itemcont"><div class="item">Loot(2) minAmount:</div><input [(ngModel)]="itemNeedsThree.minAmount"></div>
+    <div class="itemcont"><div class="item">Loot(2) maxAmount:</div><input [(ngModel)]="itemNeedsThree.maxAmount"></div>
+  </div>
+</div>

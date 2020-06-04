@@ -1,0 +1,26 @@
+<div *ngIf="isLoading" class="text-center mx-auto">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<ng-container *ngIf="!isLoading">
+  <ng-container>
+    <div class="m-0 p-0 header">
+      <app-header></app-header>
+    </div>
+    <div class="row m-0 p-0">
+      <div class="col background w-100 m-0 p-0">
+        <div class="row m-0 p-0 pt-5">
+          <div class="col m-0 p-0">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <app-footer></app-footer>
+    </footer>
+  </ng-container>
+</ng-container>
+
+<div (window:resize)="onResize()"></div>
+

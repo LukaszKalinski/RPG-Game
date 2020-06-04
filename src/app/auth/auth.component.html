@@ -1,0 +1,29 @@
+<app-alert [message]="error" *ngIf="error" (closed)="onHandleError()"></app-alert>
+
+<form class="login-container mx-auto" [class.logincontainermobile]="isMobile" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)" [@loginform]>
+  <div class="input-container">
+    <input
+    class="input-field"
+    type="email"
+    formControlName="email"
+    placeholder="E-mail">
+  </div>
+  <div class="input-container">
+    <input
+    class="input-field"
+    type="password"
+    formControlName="password"
+    placeholder="Password">
+  </div>
+  <div>
+    <button class="center" type="submit" style="margin-bottom: 10px;" [disabled]="!loginForm.valid">{{ isLoginMode ? 'Login' : 'Register' }}</button>
+  </div>
+  <div class="text">
+    {{ isLoginMode ? 'Dont have an account?' : 'Already registered?' }} <br>
+    <p (click)="onChangeMode()"> {{ isLoginMode ? 'Sign up here!' : 'Login then!' }} </p>
+  </div>
+</form>
+
+<div *ngIf="isLoading" class="text-center mx-auto">
+  <app-loading-spinner></app-loading-spinner>
+</div>

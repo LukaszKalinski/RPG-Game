@@ -1,0 +1,27 @@
+.skillcont {
+  display: block;
+  display: inline-block;
+  width: 200px;
+  color: white;
+}
+
+.itemcont {
+  width: 200px;
+  display: inline-grid;
+  margin: 1px;
+}
+
+.itemcontw {
+  width: 80%;
+  margin: 1px;
+}
+
+.item {
+  display:flex;
+  width: 100%;
+  color: white;
+}
+
+input {
+  width: 200px;
+}

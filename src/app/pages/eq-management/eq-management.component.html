@@ -1,0 +1,81 @@
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col m-0 p-0 text-center btn-group">
+    <button class="btn btn-success" (click)="loadAllItemsFromServer()">Load all from Server</button>
+    <button class="btn btn-warning" (click)="sendAllItemsToServer(allEquipment)">Send all to Server</button>
+    <button class="btn btn-danger" (click)="saveParticularItemInfo()">Save changes to Record</button>
+    <button class="btn btn-info" (click)="createNewItem()">Create New Record</button>
+  </div>
+</div>
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col-md-1 m-0 p-0 mx-auto my-auto">
+    <fa-icon [icon]="leftIcon" size="3x" (click)="goBack()" style="color: white"></fa-icon>
+  </div>
+  <div class="col md-10 m-0 p-0">
+    <div class="skillcont">
+      {{ allEquipment[itemIndex].name }}
+    </div>
+    <div style="color: white" class="w-100">
+      {{ allEquipment[itemIndex].img }}
+    </div>
+    <div style="color: white" class="w-100">
+      {{ allEquipment[itemIndex].desc }}
+    </div>
+    <ng-container *ngFor="let item of selectedItem; let i = index">
+      <div class="skillcont" *ngIf="item[0] !== 'img' && item[0] !== 'name' && item[0] !== 'desc'">
+        {{ item[0] }} / <span style="color: gold">{{ item[1] }}</span>
+      </div>
+    </ng-container>
+  </div>
+  <div class="col-md-1 m-0 p-0 mx-auto my-auto">
+    <fa-icon [icon]="rightIcon" size="3x" (click)="goForward()" style="color: white"></fa-icon>
+  </div>
+</div>
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">Name:</div><input [(ngModel)]="itemName"></div>
+    <div class="itemcont"><div class="item">Image:</div><input [(ngModel)]="itemImg"></div>
+    <div class="itemcont"><div class="item">Type:</div><input [(ngModel)]="itemType"></div>
+    <div class="itemcont"><div class="item">Req Prof:</div><input [(ngModel)]="itemReqProfession"></div>
+    <div class="itemcont"><div class="item">Req Lev:</div><input [(ngModel)]="itemReqLevel"></div>
+    <div class="itemcont"><div class="item">Req Skill:</div><input [(ngModel)]="itemReqSkill"></div>
+    <div class="itemcont"><div class="item">Req SLev:</div><input [(ngModel)]="itemReqSkillLevel"></div>
+    <div class="itemcont"><div class="item">Melee Attack:</div><input [(ngModel)]="itemMeleeAttack"></div>
+    <div class="itemcont"><div class="item">Shielding:</div><input [(ngModel)]="itemShielding"></div>
+    <div class="itemcont"><div class="item">Defence:</div><input [(ngModel)]="itemDefence"></div>
+    <div class="itemcont"><div class="item">Range Attack:</div><input [(ngModel)]="itemRangeAttack"></div>
+    <div class="itemcont"><div class="item">Magic Attack:</div><input [(ngModel)]="itemMagic"></div>
+    <div class="itemcont"><div class="item">Speed:</div><input [(ngModel)]="itemSpeed"></div>
+    <div class="itemcont"><div class="item">Weight:</div><input [(ngModel)]="itemWeight"></div>
+    <div class="itemcont"><div class="item">Amount:</div><input [(ngModel)]="itemAmount"></div>
+    <div class="itemcont"><div class="item">Condition:</div><input [(ngModel)]="itemCondition"></div>
+    <div class="itemcont"><div class="item">Rarity:</div><input [(ngModel)]="itemRarity"></div>
+    <div class="itemcont"><div class="item">+ HP:</div><input [(ngModel)]="itemExtraHP"></div>
+    <div class="itemcont"><div class="item">+ Mana:</div><input [(ngModel)]="itemExtraMana"></div>
+    <div class="itemcont"><div class="item">+ Strength:</div><input [(ngModel)]="itemExtraStrength"></div>
+    <div class="itemcont"><div class="item">+ Accuracy:</div><input [(ngModel)]="itemExtraAccuracy"></div>
+    <div class="itemcont"><div class="item">+ Magic:</div><input [(ngModel)]="itemExtraMagic"></div>
+    <div class="itemcont"><div class="item">+ Sword Skill:</div><input [(ngModel)]="itemExtraSwordSkill"></div>
+    <div class="itemcont"><div class="item">+ Axe Skill:</div><input [(ngModel)]="itemExtraAxeSkill"></div>
+    <div class="itemcont"><div class="item">+ Hammer Skill:</div><input [(ngModel)]="itemExtraHammerSkill"></div>
+    <div class="itemcont"><div class="item">+ Shielding Skill:</div><input [(ngModel)]="itemExtraShieldingSkill"></div>
+    <div class="itemcont"><div class="item">+ Bow Skill:</div><input [(ngModel)]="itemExtraBowSkill"></div>
+    <div class="itemcont"><div class="item">+ Crossbow Skill:</div><input [(ngModel)]="itemExtraCrossbowSkill"></div>
+    <div class="itemcont"><div class="item">+ Wand Skill:</div><input [(ngModel)]="itemExtraWandSkill"></div>
+    <div class="itemcont"><div class="item">+ Rod Skill:</div><input [(ngModel)]="itemExtraRodSkill"></div>
+    <div class="itemcont"><div class="item">+ Woodcutt:</div><input [(ngModel)]="itemExtraWoodcuttingSkill"></div>
+    <div class="itemcont"><div class="item">+ Carpentry:</div><input [(ngModel)]="itemExtraCarpentrySkill"></div>
+    <div class="itemcont"><div class="item">+ Mining:</div><input [(ngModel)]="itemExtraMiningSkill"></div>
+    <div class="itemcont"><div class="item">+ Blacksmith:</div><input [(ngModel)]="itemExtraBlackSmithingSkill"></div>
+    <div class="itemcont"><div class="item">+ Herbology:</div><input [(ngModel)]="itemExtraHerbologySkill"></div>
+    <div class="itemcont"><div class="item">+ Alchemy:</div><input [(ngModel)]="itemExtraAlchemySkill"></div>
+    <div class="itemcont"><div class="item">+ Sorcery:</div><input [(ngModel)]="itemExtraSorcerySkill"></div>
+    <div class="itemcont"><div class="item">+ Rune Craft:</div><input [(ngModel)]="itemExtraRuneCraftingSkill"></div>
+    <div class="itemcont"><div class="item">Description:</div><input [(ngModel)]="itemDesc"></div>
+    <div class="itemcont"><div class="item">Usable:</div><input [(ngModel)]="itemUsable"></div>
+    <div class="itemcont"><div class="item">Stackable:</div><input [(ngModel)]="itemStackable"></div>
+    <div class="itemcont"><div class="item">Element:</div><input [(ngModel)]="itemRuneElement"></div>
+    <div class="itemcont"><div class="item">isTwoHanded:</div><input [(ngModel)]="itemIsTwoHanded"></div>
+    <div class="itemcont"><div class="item">Sell Value:</div><input [(ngModel)]="itemSellValue"></div>
+    <div class="itemcont"><div class="item">Buy Value:</div><input [(ngModel)]="itemBuyValue"></div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+.container {
+  position: fixed;
+  width: 95%;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.mobilepos {
+  top: 50%;
+}
+
+.maintitle {
+  margin: 5px;
+  text-align: center;
+  color: rgb(78, 76, 76);
+  text-shadow: 0px 0px 1px black;
+  font-size: 64px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.mainsubtitle {
+  margin: 5px;
+  text-align: center;
+  color: rgb(143, 11, 11);
+  text-shadow: 0px 0px 1px black;
+  font-size: 40px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.btn-group {
+  width: 200px;
+  display: flex;
+}

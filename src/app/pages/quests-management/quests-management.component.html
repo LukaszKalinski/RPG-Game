@@ -1,0 +1,65 @@
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col m-0 p-0 text-center btn-group">
+    <button class="btn btn-success" (click)="loadAllItemsFromServer()">Load all from Server</button>
+    <button class="btn btn-warning" (click)="sendAllItemsToServer(allQuests)">Send all to Server</button>
+    <button class="btn btn-danger" (click)="saveParticularItemInfo()">Save changes to Record</button>
+    <button class="btn btn-info" (click)="createNewItem()">Create New Record</button>
+  </div>
+</div>
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col-md-1 m-0 p-0 mx-auto my-auto">
+    <fa-icon [icon]="leftIcon" size="3x" (click)="goBack()" style="color: white"></fa-icon>
+  </div>
+  <div class="col-md-10 m-0 p-0">
+    <div style="color: white" class="w-100">
+      {{ allQuests[itemIndex].name }}
+    </div>
+    <ng-container *ngFor="let item of selectedItem; let i = index">
+      <div class="skillcont" *ngIf="item[0] !== 'name' && item[0] !== 'loot' && item[0] !== 'rewards'">
+        {{ item[0] }} / <span style="color: gold">{{ item[1] }}</span>
+      </div>
+    </ng-container>
+  </div>
+  <div class="col-md-1 m-0 p-0 mx-auto my-auto">
+    <fa-icon [icon]="rightIcon" size="3x" (click)="goForward()" style="color: white"></fa-icon>
+  </div>
+</div>
+<div class="row m-0 p-0" style="background-color: grey;">
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">Name:</div><input [(ngModel)]="itemName"></div>
+    <div class="itemcont"><div class="item">Is Renewable:</div><input [(ngModel)]="itemIsRenewable"></div>
+    <div class="itemcont"><div class="item">Is Done:</div><input [(ngModel)]="itemIsAlreadyDone"></div>
+    <div class="itemcont"><div class="item">Is Opened:</div><input [(ngModel)]="itemIsOpened"></div>
+    <div class="itemcont"><div class="item">Req Lvl:</div><input [(ngModel)]="itemReqLevel"></div>
+    <div class="itemcont"><div class="item">Desc:</div><input [(ngModel)]="itemDesc"></div>
+  </div>
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">toDo(0) Name:</div><input [(ngModel)]="itemToDoOne.name"></div>
+    <div class="itemcont"><div class="item">toDo(0) Type.:</div><input [(ngModel)]="itemToDoOne.type"></div>
+    <div class="itemcont"><div class="item">toDo(0) Amount:</div><input [(ngModel)]="itemToDoOne.amount"></div>
+  </div>
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">toDo(1) Name:</div><input [(ngModel)]="itemToDoTwo.name"></div>
+    <div class="itemcont"><div class="item">toDo(1) Type.:</div><input [(ngModel)]="itemToDoTwo.type"></div>
+    <div class="itemcont"><div class="item">toDo(1) Amount:</div><input [(ngModel)]="itemToDoTwo.amount"></div>
+  </div>
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">toDo(0) Name:</div><input [(ngModel)]="itemToDoThree.name"></div>
+    <div class="itemcont"><div class="item">toDo(0) Type.:</div><input [(ngModel)]="itemToDoThree.type"></div>
+    <div class="itemcont"><div class="item">toDo(0) Amount:</div><input [(ngModel)]="itemToDoThree.amount"></div>
+  </div>
+
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">Rewards(0) Name:</div><input [(ngModel)]="itemRewardOne.name"></div>
+    <div class="itemcont"><div class="item">Rewards(0) Prob.:</div><input [(ngModel)]="itemRewardOne.amount"></div>
+  </div>
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">Rewards(1) Name:</div><input [(ngModel)]="itemRewardTwo.name"></div>
+    <div class="itemcont"><div class="item">Rewards(1) Prob.:</div><input [(ngModel)]="itemRewardTwo.amount"></div>
+  </div>
+  <div class="col m-0 p-0 text-center">
+    <div class="itemcont"><div class="item">Rewards(2) Name:</div><input [(ngModel)]="itemRewardThree.name"></div>
+    <div class="itemcont"><div class="item">Rewards(2) Prob.:</div><input [(ngModel)]="itemRewardThree.amount"></div>
+  </div>
+
+</div>

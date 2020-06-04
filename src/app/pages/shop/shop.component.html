@@ -1,0 +1,141 @@
+<app-singleitem [item]="selectedItem" [isEquipped]="false" [isShop]="true" *ngIf="selectedItem" (itemClosed)="onCloseItem()"></app-singleitem>
+
+<ng-container *ngIf="!isMobile">
+  <div class="row m-0 p-0">
+    <div class="col-md-12 m-0 p-0">
+      <app-travelling *ngIf="characterInfo.currentDungeon.location"></app-travelling>
+      <div class="text-center" *ngIf="!characterInfo.currentDungeon.location">
+        <div class="w-100 m-0 mt-2 p-0 mb-2" style="color: white;">
+          <button (click)="onSwitchOperation()">Switch to {{ isBuying? 'sell' : 'buy' }}</button>
+          <span style="text-shadow: 0px 0px 5px black;"> Filter: </span> <input type="text" [(ngModel)]="filter" (ngModelChange)="refreshVisibleCount()">
+        </div>
+      <div class="row m-0 p-0">
+        <div class="col-md-1 m-0 p-0 mx-auto my-auto text-center">
+          <fa-icon [icon]="leftIcon" size="3x" (click)="goBack()" style="color: white"></fa-icon>
+        </div>
+        <div class="col md-10 m-0 p-0">
+          <div [@entercards]="slides[page].length">
+            <ng-container *ngFor="let item of slides[page]">
+              <ng-container>
+                <div class="container m-1" [class.blockeditem]="item.buyValue > balance" *ngIf="!item.name.includes('Starting') && item.name !== 'Gold Coin'">
+                  <div class="name">
+                    {{ item.name}}
+                  </div>
+                  <div class="w-100 text-center m-1">
+                    <img [src]="item.img">
+                  </div>
+                  <div class="w-100" *ngIf="isBuying">
+                    <p class="item">
+                      Value:
+                     </p>
+                     <p class="item" style="color: gold">
+                       {{ item.buyValue }}
+                     </p>
+                  </div>
+                  <div class="w-100" *ngIf="!isBuying">
+                    <p class="item">
+                      Value (1):
+                     </p>
+                     <p class="item" style="color: gold">
+                       {{ item.sellValue }}
+                     </p>
+                  </div>
+                  <div class="w-100">
+                    <p class="item">
+                      Amount:
+                     </p>
+                     <p class="item" style="color: gold">
+                       {{ item.amount }}
+                     </p>
+                  </div>
+                  <div class="btn-group text-center w-100">
+                    <button class="btn btn-info" (click)="onOpenDetails(item)">Details</button>
+                    <button class="btn btn-success" [disabled]="isBuying && (item.buyValue > balance)"(click)="onItemOperation(isBuying, item)">{{ isBuying? 'Buy' : 'Sell' }}</button>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+        <div class="col-md-1 m-0 p-0 mx-auto my-auto text-center">
+          <fa-icon [icon]="rightIcon" size="3x" (click)="goForward()" style="color: white"></fa-icon>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isMobile">
+  <div class="row m-0 p-0">
+    <div class="col-sm-12 m-0 p-0">
+      <app-travelling *ngIf="characterInfo.currentDungeon.location"></app-travelling>
+      <div class="text-center" *ngIf="!characterInfo.currentDungeon.location">
+        <div class="w-100 m-0 mt-2 p-0 mb-2" style="color: white;">
+          <button (click)="onSwitchOperation()">Switch to {{ isBuying? 'sell' : 'buy' }}</button>
+          <span style="text-shadow: 0px 0px 5px black;"> Filter: </span><input type="text" [(ngModel)]="filter" (ngModelChange)="refreshVisibleCount()">
+        </div>
+        <div class="col-sm-12 m-0 mt-1 p-0">
+          <div class="row m-0 p-0">
+            <div class="col-sm-12 m-0 mt-1 p-0 text-center mx-auto my-auto">
+              <div [@entercards]="slides[page].length">
+                <ng-container *ngFor="let item of slides[page]">
+                  <ng-container>
+                    <div class="container m-1" [class.blockeditem]="item.buyValue > balance" *ngIf="!item.name.includes('Starting') && item.name !== 'Gold Coin'">
+                      <div class="name">
+                        {{ item.name}}
+                      </div>
+                      <div class="w-100 text-center m-1">
+                        <img [src]="item.img">
+                      </div>
+                      <div class="w-100" *ngIf="isBuying">
+                        <p class="item">
+                          Value:
+                        </p>
+                        <p class="item" style="color: gold">
+                          {{ item.buyValue }}
+                        </p>
+                      </div>
+                      <div class="w-100" *ngIf="!isBuying">
+                        <p class="item">
+                          Value (1):
+                        </p>
+                        <p class="item" style="color: gold">
+                          {{ item.sellValue }}
+                        </p>
+                      </div>
+                      <div class="w-100">
+                        <p class="item">
+                          Amount:
+                        </p>
+                        <p class="item" style="color: gold">
+                          {{ item.amount }}
+                        </p>
+                      </div>
+                      <div class="btn-group text-center w-100">
+                        <button class="btn btn-info" (click)="onOpenDetails(item)">Details</button>
+                        <button class="btn btn-success" [disabled]="isBuying && (item.buyValue > balance)"(click)="onItemOperation(isBuying, item)">{{ isBuying? 'Buy' : 'Sell' }}</button>
+                      </div>
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 m-0 p-0 text-center mx-auto my-auto">
+        <div class="row m-0 p-0 mx-auto my-auto">
+          <div class="col m-0 mt-1 p-0 mx-auto my-auto text-center">
+            <fa-icon [icon]="leftIcon" size="3x" (click)="goBack()" style="color: white"></fa-icon>
+          </div>
+          <div class="col m-0 mt-1 p-0 mx-auto my-auto text-center">
+            <fa-icon [icon]="rightIcon" size="3x" (click)="goForward()" style="color: white"></fa-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<div (window:resize)="onResize()"></div>

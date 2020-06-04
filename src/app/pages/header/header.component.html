@@ -1,0 +1,100 @@
+<ng-container *ngIf="!isMobile">
+  <div class="row background m-0 p-0">
+    <div class="col m-0 p-0">
+      <table class="w-100">
+        <tr>
+          <td class="w-25">
+            <div class="my-auto">
+              <img src="https://i.ibb.co/QK77HSn/logo-rastrowe-bez-t-a.png" class="img-wrapper">
+            </div>
+          </td>
+          <td class="text-center">
+            <app-header-menu></app-header-menu>
+          </td>
+          <td class="w-25 text-center">
+            <div class="my-auto mx-auto">
+              <ng-container *ngIf="!loggedUser">
+                <button class="m-2" button routerLink="/home/login">Login</button>
+              </ng-container>
+              <ng-container *ngIf="loggedUser">
+                <div class="row m-0 p-0 text-center">
+                  <div class="col m-0 p-0 my-auto mx-auto">
+                    <table class="w-100">
+                      <tr>
+                        <td class="text-center">
+                          <div class="valuable m-2 my-auto" *ngIf="!isShort()">
+                            <div class="">
+                              <fa-icon [icon]="goldIcon" size="sm" style="color: gold"></fa-icon>
+                              <span style="color: gold; padding-left: 10px;">{{ valueDisplay(balance) }} <br></span>
+                            </div>
+                          </div>
+                          <div class="valuable m-2 my-auto" *ngIf="!isShort()">
+                            <div class="">
+                              <fa-icon [icon]="gemIcon" size="sm" style="color: rgb(158, 30, 30)"></fa-icon>
+                              <span style="color: rgb(158, 30, 30); text-shadow: 0px 0px 5px white; padding-left: 10px;">{{ valueDisplay(100) }}</span>
+                            </div>
+                          </div>
+                          <div class="valuable m-2 my-auto">
+                            <div class="">
+                              <span style="color: gold; padding-left: 10px;"> {{ charName }} ({{ charLev }})</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td >
+                          <button class="m-2 mr-1" (click)="onLogout()">Logout</button>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isMobile">
+  <div class="row w-100 m-0 p-0 greybckg">
+    <div class="col m-0 p-0">
+      <table *ngIf="!loggedUser" class="w-100">
+        <td class="w-25 text-center">
+          <app-header-menu></app-header-menu>
+        </td>
+        <td class="w-50 text-center">
+        </td>
+        <td class="w-25 text-center">
+          <div class="my-auto mx-auto">
+            <button class="m-2" button routerLink="/home/login">Login</button>
+          </div>
+        </td>
+      </table>
+      <table *ngIf="loggedUser" class="w-100">
+        <td class="w-25 text-center">
+          <app-header-menu></app-header-menu>
+        </td>
+        <td class="w-50 text-center">
+          <div class="valuable my-auto mr-1">
+            <div class="">
+              <fa-icon [icon]="goldIcon" size="sm" style="color: gold"></fa-icon>
+              <span style="color: gold; padding-left: 10px;">{{ valueDisplay(balance) }}</span>
+            </div>
+          </div>
+          <div class="valuable my-auto">
+            <div class="">
+              <fa-icon [icon]="gemIcon" size="sm" style="color: rgb(158, 30, 30)"></fa-icon>
+              <span style="color: rgb(158, 30, 30); padding-left: 10px;">{{ valueDisplay(100) }}</span>
+            </div>
+          </div>
+        </td>
+        <td class="w-25 text-center">
+          <div class="my-auto mx-auto">
+            <button class="m-2" (click)="onLogout()">Logout</button>
+          </div>
+        </td>
+      </table>
+    </div>
+  </div>
+</ng-container>

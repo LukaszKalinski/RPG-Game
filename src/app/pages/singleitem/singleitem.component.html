@@ -1,0 +1,44 @@
+<div class="backdrop" (click)="onClose()"></div>
+<div class="container"
+[ngClass]="{'itemborderlevelone' : item.rarity === 1, 'itemborderleveltwo' : item.rarity === 2, 'itemborderlevelthree' : item.rarity === 3, 'itemborderlevelfour' : item.rarity === 4, 'itemborderlevelfive' : item.rarity === 5}"
+>
+  <div class="row m-0 p-0">
+    <div
+    class="name w-100 text-center"
+    [ngClass]="{'itemtitlelevelone' : item.rarity === 1, 'itemtitleleveltwo' : item.rarity === 2, 'itemtitlelevelthree' : item.rarity === 3, 'itemtitlelevelfour' : item.rarity === 4, 'itemtitlelevelfive' : item.rarity === 5}"
+    >
+      {{ item.name | uppercase }}
+    </div>
+    <div class="m-0 mt-1 mb-1 p-0 w-100 text-center">
+      <img [class.smallestimg]="isSmallestImg" [src]="item.img">
+    </div>
+    <div *ngIf="item.desc"  class="desc w-100">
+      {{ 'Description:' }}
+    </div>
+    <div *ngIf="item.desc" class="desc w-100" style="color: gold">
+      {{ item.desc }}
+    </div>
+    <ng-container *ngFor="let info of stringItem">
+      <ng-container *ngIf="info.item && !(info.name === 'Image' || info.name === 'Name' || info.name === 'Description' || info.name === 'Amount' || info.name === 'Rarity')">
+        <p class="desc my-auto">
+          <span>{{ info.name }}:</span>
+        </p>
+        <p class="desc my-auto">
+          <span style="color: gold">{{ info.item }}</span>
+        </p>
+      </ng-container>
+    </ng-container>
+    <div class="w-100 btn-group"   style="text-align: center;">
+      <button class="btn btn-primary" (click)="onEquipItem(0)" *ngIf="!isEquipped && !item.usable && item.type !== 'Valuable' && item.type !== 'Material' && item.type !== 'Ring' && item.type !== 'Rune' && !isShop && checkIfNotShieldAndTwo() && checkIfReqLev()">Equip</button>
+      <button class="btn btn-primary" (click)="onUnequipItem(item)" *ngIf="isEquipped">Unequip</button>
+      <button class="btn btn-primary" (click)="onSingleItemUse()" *ngIf="item.usable && !isShop">Use</button>
+    </div>
+    <div class="w-100 btn-group"   style="text-align: center;" *ngIf="!isEquipped && !isShop && item.type === 'Ring' && checkIfReqLev()">
+      <button class="btn btn-primary" (click)="onEquipItem(1)">Slot 1</button>
+      <button class="btn btn-primary" (click)="onEquipItem(2)">Slot 2</button>
+      <button class="btn btn-primary" (click)="onEquipItem(3)">Slot 3</button>
+      <button class="btn btn-primary" (click)="onEquipItem(4)">Slot 4</button>
+    </div>
+  </div>
+</div>
+

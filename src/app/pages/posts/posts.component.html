@@ -1,0 +1,24 @@
+<div class="row m-0 p-0">
+  <div class="col m-0 mt-1 p-0">
+    <div>
+      <cdk-virtual-scroll-viewport itemSize="100" class="example-viewport" [class.exampleviewportmobile]="isMobile">
+        <div [@post]="posts.length">
+          <div class="postcont mt-2" *ngFor="let post of posts" >
+            <div class="row m-0 p-0">
+              <div class="col-md-3 m-0 p-0 my-auto">
+                <div class="imgcont text-center">
+                  <img [src]="post.image" class="imgsmall"><br>
+                  <span class="created">{{ stringDate(post.date) }}{{ post.creator }}</span>
+                </div>
+              </div>
+              <div class="col-md-9 m-0 p-0">
+                <div class="title">{{ post.title }}</div>
+                <div class="subtitle">{{ post.subtitle }}...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  </div>
+</div>

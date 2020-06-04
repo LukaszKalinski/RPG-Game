@@ -1,0 +1,87 @@
+.login-container {
+  width: 210px;
+  height: 250px;
+  background-color: rgb(110, 110, 235, 0.4);
+  border-radius: 10px;
+  padding: 20px;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.logincontainermobile {
+  width: 210px;
+  height: 250px;
+  background-color: rgb(110, 110, 235, 0.4);
+  border-radius: 10px;
+  padding: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-alert {
+  background-color: rgb(187, 120, 120, 0.7);
+  color: white;
+  font-size: 12px;
+  border-radius: 10px;
+  padding: 10px;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.input-container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.input-field {
+  width: 100%;
+  border: 1px solid white;
+  border-radius: 10px;
+  height: 40px;
+  border: 10px;
+  padding-left: 10px;
+  outline: none;
+}
+
+.input-field:focus {
+  border: 1px solid dodgerblue;
+}
+
+.input-field.ng-valid.ng-touched  {
+  background-color: rgb(201, 201, 252);
+  border: 1px solid #42A948;
+}
+
+.input-field.ng-invalid.ng-touched  {
+  background-color: #c08d8d;
+  border: 1px solid #a94442;
+}
+
+.text {
+  font-size: 12px;
+  color: white;
+  text-align: center;
+}
+
+p {
+  color: gold;
+}
+
+p:hover {
+  cursor: pointer;
+  color: dodgerblue;
+}
+
+.button-container {
+  width: 100vw;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
