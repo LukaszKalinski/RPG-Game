@@ -3,8 +3,8 @@ button {
   border: none;
   margin-left: 10px;
   background-color: transparent;
-  color: skyblue;
-  border-bottom: solid 1px darkgray;
+  color: rgb(104, 104, 233);
+  border-bottom: solid 1px rgb(104, 104, 233);
   text-shadow: 0px 0px 1px black;
   outline: none
 }
@@ -12,10 +12,10 @@ button {
 button:hover {
   border-radius: 0;
   border: none;
-  border-bottom: solid 1px rgb(104, 104, 233);
+  border-bottom: solid 1px rgb(55, 55, 228);
   background-color: transparent;
-  color: rgb(104, 104, 233);
-  text-shadow: 0px 0px 1px black;
+  color: rgb(55, 55, 228);
+  text-shadow: 0px 0px 2px black;
   outline: none
 }
 
